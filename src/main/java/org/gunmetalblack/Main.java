@@ -16,5 +16,6 @@ public class Main {
 
         // Add the InputManager as the KeyListener
         window.addKeyListener(inputManager);
+        Engine engine = new Engine(window);
     }
 }
