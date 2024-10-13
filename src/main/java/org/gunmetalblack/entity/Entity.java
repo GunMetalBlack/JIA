@@ -16,6 +16,13 @@ public class Entity {
         this.graphic = new AsciiCharacterData(character,foregroundColor,backgroundColor);
     }
 
+    public Entity(char character, int xPos, int yPos)
+    {
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.graphic = new AsciiCharacterData(character,Color.WHITE, Color.black);
+    }
+
     public Entity(char character, Color foregroundColor, Color backgroundColor)
     {
         this.graphic = new AsciiCharacterData(character,foregroundColor,backgroundColor);

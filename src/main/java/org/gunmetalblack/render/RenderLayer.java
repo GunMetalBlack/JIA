@@ -23,4 +23,11 @@ public class RenderLayer{
     }
 
 
+    public Entity[][] getRenderObjects() {
+        return renderObjects;
+    }
+
+    public void setRenderObjects(Entity[][] renderObjects) {
+        this.renderObjects = renderObjects;
+    }
 }
