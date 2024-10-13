@@ -5,12 +5,20 @@ import org.gunmetalblack.input.InputManager;
 import javax.swing.*;
 
 public class Main {
+    /**
+     Horror : Genre
+
+    Enemies As Weapons : Rule
+
+    Distant Future : Setting
+
+    Murder Mystery
+    * */
     public static void main(String[] args)
     {
         Init window = new Init();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
-
         // Pass the Init instance to InputManager
         InputManager inputManager = new InputManager(window);
 

@@ -5,7 +5,6 @@ public class Engine {
     public Engine(Init window)
     {
         this.window = window;
-
         Update();
     }
 
