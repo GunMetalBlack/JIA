@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 public class Level {
 
     // HashMap to store specific RGB to ASCII character mappings
-    private static final HashMap<Color, Character> colorToAsciiMap = new HashMap<>();
+    private static final HashMap<Color, Entity> colorToAsciiMap = new HashMap<>();
     public static Level testLevel = new Level("test.png");
     private Entity[][] level;
 
@@ -32,7 +32,7 @@ public class Level {
             int height = image.getHeight();
 
             // Create 2D array to hold the ASCII characters
-            char[][] asciiArray = new char[height][width];
+            Entity[][] asciiArray = new Entity[height][width];
 
             // Loop through each pixel
             for (int y = 0; y < height; y++) {
@@ -41,7 +41,7 @@ public class Level {
                     Color color = new Color(image.getRGB(x, y));
 
                     // Map the color to an ASCII character (if it exists in the map)
-                    char asciiChar = mapColorToAscii(color);
+                    Entity asciiChar = mapColorToAscii(color);
 
                     // Store the corresponding ASCII character in the array
                     asciiArray[y][x] = asciiChar;
@@ -52,10 +52,12 @@ public class Level {
             level = new Entity[asciiArray.length][asciiArray[0].length];
             int x = 0;
             int y = 0;
-            for (char[] row : asciiArray) {
+            for (Entity[] row : asciiArray) {
                 x = 0;
-                for (char c : row) {
-                    level[y][x] = new Entity(c, x, y);
+                for (Entity entity : row) {
+                    entity.setxPos(x);
+                    entity.setyPos(y);
+                    level[y][x] = entity;
                     x++;
                 }
                 y++;
@@ -70,18 +72,18 @@ public class Level {
     // Define specific RGB values and their corresponding ASCII characters
     private static void defineColorToAsciiMappings() {
         // Example mappings (you can add more specific colors as needed)
-        colorToAsciiMap.put(new Color(255, 0, 0), '@');    // Red
-        colorToAsciiMap.put(new Color(0, 255, 0), '#');    // Green
-        colorToAsciiMap.put(new Color(0, 0, 255), '$');    // Blue
-        colorToAsciiMap.put(new Color(255, 255, 255), '.'); // White
-        colorToAsciiMap.put(new Color(0, 0, 0), '*');      // Black
+        colorToAsciiMap.put(new Color(255, 0, 0), new Entity((char)219,0,0));    // Red
+        colorToAsciiMap.put(new Color(0, 255, 0),  new Entity('#',0,0));    // Green
+        colorToAsciiMap.put(new Color(0, 0, 255), new Entity('$',0,0));    // Blue
+        colorToAsciiMap.put(new Color(255, 255, 255), new Entity(' ',0,0)); // White
+        colorToAsciiMap.put(new Color(0, 0, 0), new Entity((char)176,Color.DARK_GRAY,Color.black,0,0));      // Black
         // Add more specific RGB to ASCII mappings here...
     }
 
     // Map a color to an ASCII character based on the specific RGB mappings
-    private static char mapColorToAscii(Color color) {
+    private static Entity mapColorToAscii(Color color) {
         // Check if the color exists in the map, if not, return a default character (e.g., '?')
-        return colorToAsciiMap.getOrDefault(color, '?');
+        return colorToAsciiMap.getOrDefault(color, new Entity('?',0,0));
     }
 
     public Entity[][] getLevel() {
