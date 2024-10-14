@@ -1,6 +1,7 @@
 package org.gunmetalblack;
 
 import org.gunmetalblack.entity.LivingEntitiyManager;
+import org.gunmetalblack.input.InputManager;
 import org.gunmetalblack.render.Render;
 import org.gunmetalblack.render.RenderLayerName;
 
@@ -8,11 +9,13 @@ public class Engine {
     private Init window;
     private Render GameRenderer;
     private LivingEntitiyManager livingEntitiyManager;
-    public Engine(Init window)
+    public Engine(Init window, InputManager inputManager)
     {
         this.window = window;
         this.GameRenderer = new Render(window);
         this.livingEntitiyManager = new LivingEntitiyManager();
+        inputManager.setLivingEntitiyManager(this.livingEntitiyManager);
+
         Update();
     }
 
@@ -21,11 +24,11 @@ public class Engine {
      */
     public void Update()
     {
-        livingEntitiyManager.instantiateLivingEntity(GameRenderer.layerToBeRendered.get(RenderLayerName.GAME_LAYER).getLayers())
-        GameRenderer.renderLayerByName(RenderLayerName.GAME_LAYER);
+        livingEntitiyManager.instantiateLivingEntity(GameRenderer.layerToBeRendered.get(RenderLayerName.GAME_LAYER).getChildLayer(RenderLayerName.GL_LIVING_ENTITY_LAYER),livingEntitiyManager.player);
         while (true)
         {
-
+            GameRenderer.renderLayerByName(RenderLayerName.GAME_LAYER);
+            window.getTerminal().repaint();
         }
     }
 }

@@ -3,7 +3,6 @@ package org.gunmetalblack.render;
 import org.gunmetalblack.Init;
 import org.gunmetalblack.entity.Entity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Render {
@@ -19,7 +18,7 @@ public class Render {
          * */
         //Main Game layers and Sub layers --------------------------------------------------------------------------------------------------
         mainGameLayer = new MainRenderLayer(RenderLayerName.GAME_LAYER, Level.testLevel.getLevel(),40,30);
-        createChildRenderLayer(mainGameLayer,RenderLayerName.LIVING_ENTITY_LAYER, new Entity[mainGameLayer.getMaxColumns()][mainGameLayer.getMaxRows()]);
+        createChildRenderLayer(mainGameLayer,RenderLayerName.GL_LIVING_ENTITY_LAYER, new Entity[mainGameLayer.getMaxColumns()][mainGameLayer.getMaxRows()]);
         layerToBeRendered.put(RenderLayerName.GAME_LAYER,mainGameLayer);
         //----------------------------------------------------------------------------------------------------------------------------------
     }
@@ -32,10 +31,10 @@ public class Render {
             if(layer.getLayerName().equals(layerName))
             {
                 //Renders the main render layer then renders the child layers on top!
-                renderEntityArray(layer.getRenderObjects(),layer.getMaxColumns(), layer.getMaxRows());
+                renderEntityArray(layer.GetEntitiesInLayer(),layer.getMaxColumns(), layer.getMaxRows());
                 for(ChildRenderLayer childLayer : layer.getLayers().values())
                 {
-                    renderEntityArray(childLayer.getRenderObjects(),childLayer.getMaxColumns(),childLayer.getMaxRows());
+                    renderEntityArray(childLayer.GetEntitiesInLayer(),childLayer.getMaxColumns(),childLayer.getMaxRows());
                 }
             }
         }
@@ -51,7 +50,9 @@ public class Render {
 
         for (int i = 0; i < objectToBeRendered.length; i++) {
             for (int j = 0; j < objectToBeRendered[i].length; j++) {
-                window.getTerminal().write(objectToBeRendered[i][j].getGraphic(), columns, rows);
+                Entity entity = objectToBeRendered[i][j];
+                if(entity != null){window.getTerminal().write(entity.getGraphic(), columns, rows);}
+
 
                 // Move to the next column
                 columns++;
@@ -73,6 +74,6 @@ public class Render {
     public void createChildRenderLayer(MainRenderLayer mLayer,RenderLayerName name, Entity[][] renderObjects)
     {
         ChildRenderLayer cLayer = new ChildRenderLayer(name, renderObjects, mLayer.getMaxColumns(), mLayer.getMaxRows());
-        mLayer.addLayer(cLayer);
+        mLayer.addChildLayer(name,cLayer);
     }
 }

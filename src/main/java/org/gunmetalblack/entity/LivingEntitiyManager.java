@@ -5,10 +5,10 @@ import org.gunmetalblack.render.RenderLayer;
 import java.awt.*;
 
 public class LivingEntitiyManager {
-    private static PlayerEntity player = new PlayerEntity((char)1, Color.YELLOW,Color.black,4,5);
+    public static PlayerEntity player = new PlayerEntity((char)1, Color.YELLOW,Color.black,4,5);
 
-    public Entity[][] instantiateLivingEntity(RenderLayer layer)
+    public void instantiateLivingEntity(RenderLayer layer, Entity e)
     {
-
+        layer.GetEntitiesInLayer()[e.getyPos()][e.getxPos()] = e;
     }
 }

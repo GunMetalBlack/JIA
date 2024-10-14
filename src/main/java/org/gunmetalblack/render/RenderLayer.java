@@ -27,7 +27,7 @@ public class RenderLayer{
     }
 
 
-    public Entity[][] getRenderObjects() {
+    public Entity[][] GetEntitiesInLayer() {
         return renderObjects;
     }
 
