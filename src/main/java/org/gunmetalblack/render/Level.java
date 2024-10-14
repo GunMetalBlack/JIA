@@ -14,13 +14,18 @@ public class Level {
     private static final HashMap<Color, Character> colorToAsciiMap = new HashMap<>();
     public static Level testLevel = new Level("test.png");
     private Entity[][] level;
-    public Level(String imageName){
+
+    public Level(String imageName) {
         // Define specific RGB to ASCII character mappings
         defineColorToAsciiMappings();
 
         try {
-            // Load the image
-            BufferedImage image = ImageIO.read(new File(imageName));
+            // Load the image from the resources folder
+            BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/" + imageName));
+
+            if (image == null) {
+                throw new RuntimeException("Image not found: " + imageName);
+            }
 
             // Resize or scale image if necessary
             int width = image.getWidth();
@@ -44,11 +49,13 @@ public class Level {
             }
 
             // Print the ASCII 2D array (optional)
+            level = new Entity[asciiArray.length][asciiArray[0].length];
             int x = 0;
             int y = 0;
             for (char[] row : asciiArray) {
+                x = 0;
                 for (char c : row) {
-                    level[y][x] = new Entity(c,x,y);
+                    level[y][x] = new Entity(c, x, y);
                     x++;
                 }
                 y++;
@@ -66,7 +73,7 @@ public class Level {
         colorToAsciiMap.put(new Color(255, 0, 0), '@');    // Red
         colorToAsciiMap.put(new Color(0, 255, 0), '#');    // Green
         colorToAsciiMap.put(new Color(0, 0, 255), '$');    // Blue
-        colorToAsciiMap.put(new Color(255, 255, 255), '3'); // White
+        colorToAsciiMap.put(new Color(255, 255, 255), '.'); // White
         colorToAsciiMap.put(new Color(0, 0, 0), '*');      // Black
         // Add more specific RGB to ASCII mappings here...
     }

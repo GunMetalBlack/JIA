@@ -43,4 +43,8 @@ public class Entity {
     public int getyPos() {
         return yPos;
     }
+
+    public AsciiCharacterData getGraphic() {
+        return graphic;
+    }
 }

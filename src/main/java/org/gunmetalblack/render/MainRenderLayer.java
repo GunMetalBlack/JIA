@@ -5,17 +5,17 @@ import org.gunmetalblack.entity.Entity;
 import java.util.ArrayList;
 
 public class MainRenderLayer extends RenderLayer{
-    private ArrayList<RenderLayer> layers;
+    private ArrayList<ChildRenderLayer> layers;
 
-    public MainRenderLayer(String layerName, Entity[][] renderObjects) {
-        super(layerName, renderObjects);
+    public MainRenderLayer(String layerName, Entity[][] renderObjects, int maxColumns, int maxRows) {
+        super(layerName, renderObjects, maxColumns, maxRows);
     }
 
-    public ArrayList<RenderLayer> getLayers() {
+    public ArrayList<ChildRenderLayer> getLayers() {
         return layers;
     }
 
-    public void addLayer(RenderLayer layer) {
+    public void addLayer(ChildRenderLayer layer) {
         this.layers.add(layer);
     }
 }
