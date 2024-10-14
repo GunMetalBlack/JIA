@@ -1,6 +1,7 @@
 package org.gunmetalblack.render;
 
 import org.gunmetalblack.entity.Entity;
+import org.gunmetalblack.entity.PlayerEntity;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -73,7 +74,7 @@ public class Level {
     private static void defineColorToAsciiMappings() {
         // Example mappings (you can add more specific colors as needed)
         colorToAsciiMap.put(new Color(255, 0, 0), new Entity((char)219,0,0));    // Red
-        colorToAsciiMap.put(new Color(0, 255, 0),  new Entity('#',0,0));    // Green
+        colorToAsciiMap.put(new Color(0, 255, 0),  new Entity('*',0,0));    // Green
         colorToAsciiMap.put(new Color(0, 0, 255), new Entity('$',0,0));    // Blue
         colorToAsciiMap.put(new Color(255, 255, 255), new Entity(' ',0,0)); // White
         colorToAsciiMap.put(new Color(0, 0, 0), new Entity((char)176,Color.DARK_GRAY,Color.black,0,0));      // Black

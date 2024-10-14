@@ -13,7 +13,7 @@ public class Init extends JFrame {
 
     public Init() {
         super();
-        terminal = new AsciiPanel(80, 60, AsciiFont.TALRYTH_15_15);
+        terminal = new AsciiPanel(80, 60, AsciiFont.CP437_16x16);
         setFocusable(true);
         add(terminal);
         pack();

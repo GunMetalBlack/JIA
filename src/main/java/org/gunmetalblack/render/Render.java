@@ -4,10 +4,12 @@ import org.gunmetalblack.Init;
 import org.gunmetalblack.entity.Entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Render {
     private Init window;
-    public ArrayList<MainRenderLayer> layerToBeRendered = new ArrayList<>();
+    public HashMap<RenderLayerName,MainRenderLayer> layerToBeRendered = new HashMap<>();
+    public static MainRenderLayer mainGameLayer;
     //TODO: Make a render stack that each layer is on
     public Render(Init window)
     {
@@ -15,20 +17,23 @@ public class Render {
         /*
          * Used To make a Main layer which all the sub-layers will be drawn on top of
          * */
-        MainRenderLayer mainGameLayer = new MainRenderLayer("GameLayer", Level.testLevel.getLevel(),40,30);
-        layerToBeRendered.add(mainGameLayer);
+        //Main Game layers and Sub layers --------------------------------------------------------------------------------------------------
+        mainGameLayer = new MainRenderLayer(RenderLayerName.GAME_LAYER, Level.testLevel.getLevel(),40,30);
+        createChildRenderLayer(mainGameLayer,RenderLayerName.LIVING_ENTITY_LAYER, new Entity[mainGameLayer.getMaxColumns()][mainGameLayer.getMaxRows()]);
+        layerToBeRendered.put(RenderLayerName.GAME_LAYER,mainGameLayer);
+        //----------------------------------------------------------------------------------------------------------------------------------
     }
 
 
-    public void renderLayerByName(String layerName)
+    public void renderLayerByName(RenderLayerName layerName)
     {
-        for(MainRenderLayer layer : layerToBeRendered)
+        for(MainRenderLayer layer : layerToBeRendered.values())
         {
             if(layer.getLayerName().equals(layerName))
             {
                 //Renders the main render layer then renders the child layers on top!
                 renderEntityArray(layer.getRenderObjects(),layer.getMaxColumns(), layer.getMaxRows());
-                for(ChildRenderLayer childLayer : layer.getLayers())
+                for(ChildRenderLayer childLayer : layer.getLayers().values())
                 {
                     renderEntityArray(childLayer.getRenderObjects(),childLayer.getMaxColumns(),childLayer.getMaxRows());
                 }
@@ -65,7 +70,7 @@ public class Render {
         }
     }
 
-    public void createChildRenderLayer(MainRenderLayer mLayer,String name, Entity[][] renderObjects)
+    public void createChildRenderLayer(MainRenderLayer mLayer,RenderLayerName name, Entity[][] renderObjects)
     {
         ChildRenderLayer cLayer = new ChildRenderLayer(name, renderObjects, mLayer.getMaxColumns(), mLayer.getMaxRows());
         mLayer.addLayer(cLayer);

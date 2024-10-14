@@ -2,17 +2,15 @@ package org.gunmetalblack.render;
 
 import org.gunmetalblack.entity.Entity;
 
-import java.util.ArrayList;
-
 public class RenderLayer{
 
     private Entity[][] renderObjects;
-    private String layerName;
+    private RenderLayerName layerName;
 
     private int maxColumns;
     private int maxRows;
 
-    public RenderLayer(String layerName, Entity[][] renderObjects, int maxColumns, int maxRows)
+    public RenderLayer(RenderLayerName layerName, Entity[][] renderObjects, int maxColumns, int maxRows)
     {
         this.renderObjects = renderObjects;
         this.layerName = layerName;
@@ -20,11 +18,11 @@ public class RenderLayer{
         this.maxRows = maxRows;
     }
 
-    public String getLayerName() {
+    public RenderLayerName getLayerName() {
         return layerName;
     }
 
-    public void setLayerName(String layerName) {
+    public void setLayerName(RenderLayerName layerName) {
         this.layerName = layerName;
     }
 

@@ -3,19 +3,20 @@ package org.gunmetalblack.render;
 import org.gunmetalblack.entity.Entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainRenderLayer extends RenderLayer{
-    private ArrayList<ChildRenderLayer> layers = new ArrayList<>();
+    private HashMap<RenderLayerName,ChildRenderLayer> layers = new HashMap<>();
 
-    public MainRenderLayer(String layerName, Entity[][] renderObjects, int maxColumns, int maxRows) {
+    public MainRenderLayer(RenderLayerName layerName, Entity[][] renderObjects, int maxColumns, int maxRows) {
         super(layerName, renderObjects, maxColumns, maxRows);
     }
 
-    public ArrayList<ChildRenderLayer> getLayers() {
-        return layers;
+    public ChildRenderLayer getChildLayer(RenderLayerName name) {
+        return layers.get(name);
     }
 
-    public void addLayer(ChildRenderLayer layer) {
-        this.layers.add(layer);
+    public void addLayer(RenderLayerName name,ChildRenderLayer layer) {
+        this.layers.put(name,layer);
     }
 }
