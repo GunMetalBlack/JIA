@@ -1,11 +1,9 @@
 package org.gunmetalblack.render;
 
 import org.gunmetalblack.entity.Entity;
-import org.gunmetalblack.entity.PlayerEntity;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 

@@ -24,7 +24,14 @@ public class InputManager implements KeyListener {
         int keyCode = keyEvent.getKeyCode();  // Get the keycode of the pressed key
 
         if (keyCode == KeyEvent.VK_W) {
+            livingEntitiyManager.player.setyPos(livingEntitiyManager.player.getyPos()-1);
+        }
+        else if (keyCode == KeyEvent.VK_D){
             livingEntitiyManager.player.setxPos(livingEntitiyManager.player.getxPos()+1);
+        } else if (keyCode == KeyEvent.VK_A) {
+            livingEntitiyManager.player.setxPos(livingEntitiyManager.player.getxPos()-1);
+        } else if (keyCode == KeyEvent.VK_S) {
+            livingEntitiyManager.player.setyPos(livingEntitiyManager.player.getyPos()+1);
         }
     }
 

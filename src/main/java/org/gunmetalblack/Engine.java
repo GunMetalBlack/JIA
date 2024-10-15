@@ -13,7 +13,7 @@ public class Engine {
     {
         this.window = window;
         this.GameRenderer = new Render(window);
-        this.livingEntitiyManager = new LivingEntitiyManager();
+        this.livingEntitiyManager = new LivingEntitiyManager(GameRenderer.layerToBeRendered.get(RenderLayerName.GAME_LAYER).getChildLayer(RenderLayerName.GL_LIVING_ENTITY_LAYER));
         inputManager.setLivingEntitiyManager(this.livingEntitiyManager);
 
         Update();
@@ -27,7 +27,7 @@ public class Engine {
         livingEntitiyManager.instantiateLivingEntity(GameRenderer.layerToBeRendered.get(RenderLayerName.GAME_LAYER).getChildLayer(RenderLayerName.GL_LIVING_ENTITY_LAYER),livingEntitiyManager.player);
         while (true)
         {
-            GameRenderer.renderLayerByName(RenderLayerName.GAME_LAYER);
+            GameRenderer.renderMainLayerAndChildrenByName(RenderLayerName.GAME_LAYER);
             window.getTerminal().repaint();
         }
     }
