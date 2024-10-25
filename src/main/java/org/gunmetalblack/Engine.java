@@ -27,7 +27,8 @@ public class Engine {
         livingEntitiyManager.instantiateLivingEntity(GameRenderer.layerToBeRendered.get(RenderLayerName.GAME_LAYER).getChildLayer(RenderLayerName.GL_LIVING_ENTITY_LAYER),livingEntitiyManager.player);
         while (true)
         {
-            GameRenderer.renderMainLayerAndChildrenByName(RenderLayerName.GAME_LAYER);
+            GameRenderer.renderAllLayersToFramebuffer();
+            GameRenderer.renderMainLayerAndChildrenByName(RenderLayerName.FRAME_BUFFER);
             window.getTerminal().repaint();
         }
     }

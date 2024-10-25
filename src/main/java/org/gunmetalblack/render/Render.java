@@ -5,108 +5,172 @@ import org.gunmetalblack.entity.Entity;
 
 import java.util.HashMap;
 
+/**
+ * The {@code Render} class manages the rendering process for various game layers and their child layers.
+ * It supports rendering both to a window and to a framebuffer, allowing for complex multi-layer rendering.
+ */
 public class Render {
     private Init window;
-    public HashMap<RenderLayerName,MainRenderLayer> layerToBeRendered = new HashMap<>();
+    public HashMap<RenderLayerName, MainRenderLayer> layerToBeRendered = new HashMap<>();
     public static MainRenderLayer mainGameLayer;
-    //TODO: Make a render stack that each layer is on
-    public Render(Init window)
-    {
+    public static MainRenderLayer frameBuffer;
+
+    /**
+     * Constructs a new {@code Render} object.
+     *
+     * @param window the initialization object representing the game window.
+     */
+    public Render(Init window) {
         this.window = window;
         /*
-         * Used To make a Main layer which all the sub-layers will be drawn on top of
-         * */
-        //Main Game layers and Sub layers --------------------------------------------------------------------------------------------------
-        mainGameLayer = new MainRenderLayer(RenderLayerName.GAME_LAYER, Level.testLevel.getLevel(),40,30);
-        createChildRenderLayer(mainGameLayer,RenderLayerName.GL_LIVING_ENTITY_LAYER, new Entity[mainGameLayer.getMaxRows()][mainGameLayer.getMaxColumns()]);
-        layerToBeRendered.put(RenderLayerName.GAME_LAYER,mainGameLayer);
-        //----------------------------------------------------------------------------------------------------------------------------------
+         * Initializes the framebuffer and the main game layer with sub-layers.
+         */
+        frameBuffer = new MainRenderLayer(RenderLayerName.FRAME_BUFFER, new Entity[60][80], 80, 60);
+        mainGameLayer = new MainRenderLayer(RenderLayerName.GAME_LAYER, Level.testLevel.getLevel(), 40, 30);
+        createChildRenderLayer(mainGameLayer, RenderLayerName.GL_LIVING_ENTITY_LAYER, new Entity[mainGameLayer.getMaxRows()][mainGameLayer.getMaxColumns()]);
+        layerToBeRendered.put(RenderLayerName.GAME_LAYER, mainGameLayer);
     }
 
-    public void renderMainLayerAndChildrenByName(RenderLayerName layerName)
-    {
-        for(MainRenderLayer layer : layerToBeRendered.values())
-        {
-            if(layer.getLayerName().equals(layerName))
-            {
-                //Renders the main render layer then renders the child layers on top!
-                renderEntityArray(layer.GetEntitiesInLayer(),layer.getMaxColumns(), layer.getMaxRows());
-                for(ChildRenderLayer childLayer : layer.getLayers().values())
-                {
-                    renderEntityArray(childLayer.GetEntitiesInLayer(),childLayer.getMaxColumns(),childLayer.getMaxRows());
+    /**
+     * Renders the specified main render layer and its child layers by layer name.
+     *
+     * @param layerName the name of the layer to render.
+     */
+    public void renderMainLayerAndChildrenByName(RenderLayerName layerName) {
+        for (MainRenderLayer layer : layerToBeRendered.values()) {
+            if (layer.getLayerName().equals(layerName)) {
+                // Renders the main layer and its child layers
+                renderEntityArray(layer.GetEntitiesInLayer(), layer.getMaxColumns(), layer.getMaxRows());
+                for (ChildRenderLayer childLayer : layer.getLayers().values()) {
+                    renderEntityArray(childLayer.GetEntitiesInLayer(), childLayer.getMaxColumns(), childLayer.getMaxRows());
                 }
             }
         }
     }
 
-    public void renderLayerByName(RenderLayerName layerName) {
-        boolean layerFound = false;
+    /**
+     * Renders the specified entity array to the framebuffer.
+     *
+     * @param objectToBeRendered the 2D array of entities to render.
+     * @param maxColumns the maximum number of columns to render.
+     * @param maxRows the maximum number of rows to render.
+     */
+    public void renderToFramebuffer(Entity[][] objectToBeRendered, int maxColumns, int maxRows) {
+        for (int i = 0; i < objectToBeRendered.length; i++) {
+            for (int j = 0; j < objectToBeRendered[i].length; j++) {
+                Entity entity = objectToBeRendered[i][j];
+                if (entity != null) {
+                    frameBuffer.GetEntitiesInLayer()[i][j] = entity;
+                }
+            }
+        }
+    }
 
-        // First, search in the main layers
+    /**
+     * Renders all main layers and their child layers to the framebuffer.
+     */
+    public void renderAllLayersToFramebuffer() {
+        clearFramebuffer();
+
+        // Render each main layer and its children
         for (MainRenderLayer layer : layerToBeRendered.values()) {
-            if (layer.getLayerName().equals(layerName)) {
-                // Render only the main render layer
-                renderEntityArray(layer.GetEntitiesInLayer(), layer.getMaxColumns(), layer.getMaxRows());
-                layerFound = true;
-                break; // No need to continue if the layer is found
+            renderToFramebuffer(layer.GetEntitiesInLayer(), layer.getMaxColumns(), layer.getMaxRows());
+
+            for (ChildRenderLayer childLayer : layer.getLayers().values()) {
+                renderToFramebuffer(childLayer.GetEntitiesInLayer(), childLayer.getMaxColumns(), childLayer.getMaxRows());
             }
         }
 
-        // If the main layer wasn't found, search within the child layers
+        renderEntityArray(frameBuffer.GetEntitiesInLayer(), frameBuffer.getMaxColumns(), frameBuffer.getMaxRows());
+    }
+
+    /**
+     * Clears the framebuffer by setting all cells to {@code null}.
+     */
+    public void clearFramebuffer() {
+        Entity[][] entities = frameBuffer.GetEntitiesInLayer();
+        for (int i = 0; i < entities.length; i++) {
+            for (int j = 0; j < entities[i].length; j++) {
+                entities[i][j] = null;
+            }
+        }
+    }
+
+    /**
+     * Renders a specific layer by its name. First attempts to render a main layer, then searches within child layers.
+     *
+     * @param layerName the name of the layer to render.
+     */
+    public void renderLayerByName(RenderLayerName layerName) {
+        boolean layerFound = false;
+
+        for (MainRenderLayer layer : layerToBeRendered.values()) {
+            if (layer.getLayerName().equals(layerName)) {
+                renderEntityArray(layer.GetEntitiesInLayer(), layer.getMaxColumns(), layer.getMaxRows());
+                layerFound = true;
+                break;
+            }
+        }
+
         if (!layerFound) {
             for (MainRenderLayer layer : layerToBeRendered.values()) {
                 for (ChildRenderLayer childLayer : layer.getLayers().values()) {
                     if (childLayer.getLayerName().equals(layerName)) {
-                        // Render only the child layer
                         renderEntityArray(childLayer.GetEntitiesInLayer(), childLayer.getMaxColumns(), childLayer.getMaxRows());
                         layerFound = true;
-                        break; // Exit once the child layer is found
+                        break;
                     }
                 }
-                if (layerFound) break; // Exit outer loop if the child layer was found
+                if (layerFound) break;
             }
         }
 
-        // Optionally, handle the case where the layer was not found
         if (!layerFound) {
             System.out.println("Layer not found: " + layerName);
         }
     }
 
-    /*
-       Renders a 2d array of entities based on a width and height
+    /**
+     * Renders a 2D array of entities based on the given maximum number of columns and rows.
+     *
+     * @param objectToBeRendered the 2D array of entities to render.
+     * @param maxColumns the maximum number of columns to render.
+     * @param maxRows the maximum number of rows to render.
      */
-    public void renderEntityArray(Entity[][] objectToBeRendered, int maxColumns, int maxRows)
-    {
+    public void renderEntityArray(Entity[][] objectToBeRendered, int maxColumns, int maxRows) {
         int columns = 0;
         int rows = 0;
 
         for (int i = 0; i < objectToBeRendered.length; i++) {
             for (int j = 0; j < objectToBeRendered[i].length; j++) {
                 Entity entity = objectToBeRendered[i][j];
-                if(entity != null){window.getTerminal().write(entity.getGraphic(), columns, rows);}
-
-
-                // Move to the next column
-                columns++;
-
-                // Check if we've reached the maxColumns limit
-                if (columns >= maxColumns) {
-                    columns = 0;  // Reset to the first column
-                    rows++;       // Move to the next row
+                if (entity != null) {
+                    window.getTerminal().write(entity.getGraphic(), columns, rows);
                 }
 
-                // Check if we've reached the maxRows limit
+                columns++;
+
+                if (columns >= maxColumns) {
+                    columns = 0;
+                    rows++;
+                }
+
                 if (rows >= maxRows) {
-                    return;  // Exit if we've reached the row limit
+                    return;
                 }
             }
         }
     }
 
-    public void createChildRenderLayer(MainRenderLayer mLayer,RenderLayerName name, Entity[][] renderObjects)
-    {
+    /**
+     * Creates a new child render layer and adds it to the specified main render layer.
+     *
+     * @param mLayer the main render layer to which the child layer will be added.
+     * @param name the name of the child layer.
+     * @param renderObjects the 2D array of entities for the child layer.
+     */
+    public void createChildRenderLayer(MainRenderLayer mLayer, RenderLayerName name, Entity[][] renderObjects) {
         ChildRenderLayer cLayer = new ChildRenderLayer(name, renderObjects, mLayer.getMaxColumns(), mLayer.getMaxRows());
-        mLayer.addChildLayer(name,cLayer);
+        mLayer.addChildLayer(name, cLayer);
     }
 }
