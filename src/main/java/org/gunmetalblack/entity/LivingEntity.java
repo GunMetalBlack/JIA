@@ -20,9 +20,9 @@ public class LivingEntity extends Entity{
      */
     @Override
     public void setxPos(int xPos) {
-        livingLayer.GetEntitiesInLayer()[super.getyPos()][super.getxPos()] = null;
+        livingLayer.getEntitiesInLayer()[super.getyPos()][super.getxPos()] = null;
         super.setxPos(xPos);
-        livingLayer.GetEntitiesInLayer()[super.getyPos()][super.getxPos()] = this;
+        livingLayer.getEntitiesInLayer()[super.getyPos()][super.getxPos()] = this;
 
     }
 
@@ -34,9 +34,9 @@ public class LivingEntity extends Entity{
      */
     @Override
     public void setyPos(int yPos) {
-        livingLayer.GetEntitiesInLayer()[super.getyPos()][super.getxPos()] = null;
-        super.setyPos(yPos);
-        livingLayer.GetEntitiesInLayer()[super.getyPos()][super.getxPos()] = this;
+            livingLayer.getEntitiesInLayer()[super.getyPos()][super.getxPos()] = null;
+            super.setyPos(yPos);
+            livingLayer.getEntitiesInLayer()[super.getyPos()][super.getxPos()] = this;
     }
 
 

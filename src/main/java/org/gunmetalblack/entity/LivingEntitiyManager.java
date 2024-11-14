@@ -14,8 +14,12 @@ public class LivingEntitiyManager {
         player = new LivingEntity((char)1, Color.YELLOW,Color.black,0,0, livingLayer);
     }
 
+    public static ChildRenderLayer getLivingLayer() {
+        return livingLayer;
+    }
+
     public void instantiateLivingEntity(RenderLayer layer, Entity e)
     {
-        layer.GetEntitiesInLayer()[e.getyPos()][e.getxPos()] = e;
+        layer.getEntitiesInLayer()[e.getyPos()][e.getxPos()] = e;
     }
 }
