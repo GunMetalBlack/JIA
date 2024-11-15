@@ -4,7 +4,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/*
+    Code inspired from https://docs.oracle.com/javase/8/docs/api/java/util/logging/Logger.html
+    https://stackoverflow.com/questions/5950557/good-examples-using-java-util-logging
+    https://www.loggly.com/ultimate-guide/java-logging-basics/
+* */
 public class JIALogger {
     private static final String LOG_FILE = "JIA.log";
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

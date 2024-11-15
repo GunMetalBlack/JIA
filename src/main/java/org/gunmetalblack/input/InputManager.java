@@ -4,6 +4,7 @@ import org.gunmetalblack.Init;
 import org.gunmetalblack.entity.Entity;
 import org.gunmetalblack.entity.LivingEntitiyManager;
 import org.gunmetalblack.entity.LivingEntity;
+import org.gunmetalblack.events.GlobalEventManager;
 
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
@@ -39,19 +40,42 @@ public class InputManager implements KeyListener {
             {
                 player.setyPos(livingEntitiyManager.player.getyPos()-1);
             }
+            else
+            {
+                GlobalEventManager.collisionEventManager.ExecuteEvent(possibleCollisonObject);
+            }
         }
         else if (keyCode == KeyEvent.VK_D){
             possibleCollisonObject = entitiesOnTheMainGameLayer[player.getyPos()][player.getxPos()+1];
             if(!(possibleCollisonObject.canCollide()))
+            {
+
                 player.setxPos(livingEntitiyManager.player.getxPos()+1);
+            }
+            else
+            {
+                GlobalEventManager.collisionEventManager.ExecuteEvent(possibleCollisonObject);
+            }
         } else if (keyCode == KeyEvent.VK_A) {
             possibleCollisonObject = entitiesOnTheMainGameLayer[player.getyPos()][player.getxPos()-1];
             if(!(possibleCollisonObject.canCollide()))
+            {
                 player.setxPos(livingEntitiyManager.player.getxPos()-1);
+            }
+            else
+            {
+                GlobalEventManager.collisionEventManager.ExecuteEvent(possibleCollisonObject);
+            }
         } else if (keyCode == KeyEvent.VK_S) {
             possibleCollisonObject = entitiesOnTheMainGameLayer[player.getyPos()+1][player.getxPos()];
             if(!(possibleCollisonObject.canCollide()))
+            {
                 player.setyPos(livingEntitiyManager.player.getyPos()+1);
+            }
+            else
+            {
+                GlobalEventManager.collisionEventManager.ExecuteEvent(possibleCollisonObject);
+            }
         }
     }
 

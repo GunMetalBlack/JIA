@@ -1,9 +1,11 @@
 package org.gunmetalblack;
 
 import org.gunmetalblack.entity.LivingEntitiyManager;
+import org.gunmetalblack.events.GlobalEventManager;
 import org.gunmetalblack.input.InputManager;
 import org.gunmetalblack.render.Render;
 import org.gunmetalblack.render.RenderLayerName;
+import org.gunmetalblack.tools.JIALogger;
 
 public class Engine {
     private Init window;
@@ -30,6 +32,10 @@ public class Engine {
             GameRenderer.renderAllLayersToFramebuffer();
             GameRenderer.renderMainLayerAndChildrenByName(RenderLayerName.FRAME_BUFFER);
             window.getTerminal().repaint();
+            if(GlobalEventManager.collisionEventListener.hasRecivedEvent())
+            {
+                JIALogger.info(GlobalEventManager.collisionEventListener.getCollidedEntityEventResult().getyPos() + "XPOS");
+            }
         }
     }
 }
