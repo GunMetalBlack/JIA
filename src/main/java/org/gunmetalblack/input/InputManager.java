@@ -24,25 +24,34 @@ public class InputManager implements KeyListener {
     public void keyPressed(KeyEvent keyEvent) {
         // This method is called when a key is pressed
         int keyCode = keyEvent.getKeyCode();  // Get the keycode of the pressed key
+
         //TODO: Write collison for the player
+
         //Ps this shit is jank as sin
         //This is an attempt to make the code more readable! Please Forgive my war crimes
-        Entity[][] EntitiesOnTheMainGameLayer = livingEntitiyManager.getLivingLayer().getParentLayer().getEntitiesInLayer();
+        //Getting entites on the mainlayer
+        Entity[][] entitiesOnTheMainGameLayer = livingEntitiyManager.getLivingLayer().getParentLayer().getEntitiesInLayer();
         Entity possibleCollisonObject;
         LivingEntity player = livingEntitiyManager.player;
         if (keyCode == KeyEvent.VK_W) {
-            possibleCollisonObject = EntitiesOnTheMainGameLayer[player.getyPos()-1][player.getxPos()];
-            if()
+            possibleCollisonObject = entitiesOnTheMainGameLayer[player.getyPos()-1][player.getxPos()];
+            if(!(possibleCollisonObject.canCollide()))
             {
                 player.setyPos(livingEntitiyManager.player.getyPos()-1);
             }
         }
         else if (keyCode == KeyEvent.VK_D){
-            livingEntitiyManager.player.setxPos(livingEntitiyManager.player.getxPos()+1);
+            possibleCollisonObject = entitiesOnTheMainGameLayer[player.getyPos()][player.getxPos()+1];
+            if(!(possibleCollisonObject.canCollide()))
+                player.setxPos(livingEntitiyManager.player.getxPos()+1);
         } else if (keyCode == KeyEvent.VK_A) {
-            livingEntitiyManager.player.setxPos(livingEntitiyManager.player.getxPos()-1);
+            possibleCollisonObject = entitiesOnTheMainGameLayer[player.getyPos()][player.getxPos()-1];
+            if(!(possibleCollisonObject.canCollide()))
+                player.setxPos(livingEntitiyManager.player.getxPos()-1);
         } else if (keyCode == KeyEvent.VK_S) {
-            livingEntitiyManager.player.setyPos(livingEntitiyManager.player.getyPos()+1);
+            possibleCollisonObject = entitiesOnTheMainGameLayer[player.getyPos()+1][player.getxPos()];
+            if(!(possibleCollisonObject.canCollide()))
+                player.setyPos(livingEntitiyManager.player.getyPos()+1);
         }
     }
 

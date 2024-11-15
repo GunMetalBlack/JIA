@@ -10,6 +10,8 @@ import java.awt.*;
 public class Entity {
     private int xPos;
     private int yPos;
+
+    private boolean canCollide;
     private AsciiCharacterData graphic;
 
     /**
@@ -21,10 +23,11 @@ public class Entity {
      * @param xPos            the x-coordinate of the entity in the world.
      * @param yPos            the y-coordinate of the entity in the world.
      */
-    public Entity(char character, Color foregroundColor, Color backgroundColor, int xPos, int yPos) {
+    public Entity(char character, Color foregroundColor, Color backgroundColor, int xPos, int yPos, boolean canCollide) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.graphic = new AsciiCharacterData(character, foregroundColor, backgroundColor);
+        this.canCollide = canCollide;
     }
 
     /**
@@ -34,11 +37,13 @@ public class Entity {
      * @param character the ASCII character that represents the entity.
      * @param xPos      the x-coordinate of the entity in the world.
      * @param yPos      the y-coordinate of the entity in the world.
+     * @param canCollide the value on instantiation that determines how it interacts with other entities when colliding
      */
-    public Entity(char character, int xPos, int yPos) {
+    public Entity(char character, int xPos, int yPos, boolean canCollide) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.graphic = new AsciiCharacterData(character, Color.WHITE, Color.black);
+        this.canCollide = canCollide;
     }
 
     /**
@@ -95,5 +100,12 @@ public class Entity {
      */
     public AsciiCharacterData getGraphic() {
         return graphic;
+    }
+
+    public boolean canCollide() {
+        return canCollide;
+    }
+    public void setCanCollide(boolean canCollide) {
+        this.canCollide = canCollide;
     }
 }

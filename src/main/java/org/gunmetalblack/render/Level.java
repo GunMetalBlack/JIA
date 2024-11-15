@@ -71,18 +71,18 @@ public class Level {
     // Define specific RGB values and their corresponding ASCII characters
     private static void defineColorToAsciiMappings() {
         // Example mappings (you can add more specific colors as needed)
-        colorToAsciiMap.put(new Color(255, 0, 0), new Entity((char)219,0,0));    // Red
-        colorToAsciiMap.put(new Color(0, 255, 0),  new Entity('*',0,0));    // Green
-        colorToAsciiMap.put(new Color(0, 0, 255), new Entity('$',0,0));    // Blue
-        colorToAsciiMap.put(new Color(255, 255, 255), new Entity(' ',0,0)); // White
-        colorToAsciiMap.put(new Color(0, 0, 0), new Entity((char)176,Color.DARK_GRAY,Color.black,0,0));      // Black
+        colorToAsciiMap.put(new Color(255, 0, 0), new Entity((char)219,0,0,true));    // Red wall
+        colorToAsciiMap.put(new Color(0, 255, 0),  new Entity('*',0,0,false));    // Green Player Spawn !Important Only One can exist
+        colorToAsciiMap.put(new Color(0, 0, 255), new Entity('$',0,0,false));    // Blue
+        colorToAsciiMap.put(new Color(255, 255, 255), new Entity(' ',0,0,false)); // White empty
+        colorToAsciiMap.put(new Color(0, 0, 0), new Entity((char)176,Color.DARK_GRAY,Color.black,0,0,false));      // Black floor
         // Add more specific RGB to ASCII mappings here...
     }
 
     // Map a color to an ASCII character based on the specific RGB mappings
     private static Entity mapColorToAscii(Color color) {
         // Check if the color exists in the map, if not, return a default character (e.g., '?')
-        return colorToAsciiMap.getOrDefault(color, new Entity('?',0,0));
+        return colorToAsciiMap.getOrDefault(color, new Entity('?',0,0,false));
     }
 
     public Entity[][] getLevel() {
