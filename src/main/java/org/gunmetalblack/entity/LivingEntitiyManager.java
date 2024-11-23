@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class LivingEntitiyManager {
     private static ChildRenderLayer livingLayer;
-    public static LivingEntity player;
+    public static Player player;
     public LivingEntitiyManager(ChildRenderLayer livingLayer)
     {
         this.livingLayer = livingLayer;
@@ -26,7 +26,7 @@ public class LivingEntitiyManager {
         {
             throw new IllegalStateException("No Player Spawn In Level!");
         }
-        player = new LivingEntity((char)1, Color.YELLOW,Color.black,pSpawn.getxPos(),pSpawn.getyPos(), livingLayer);
+        player = new Player((char)1, Color.YELLOW,Color.black,pSpawn.getxPos(),pSpawn.getyPos(), livingLayer);
     }
 
     public static ChildRenderLayer getLivingLayer() {

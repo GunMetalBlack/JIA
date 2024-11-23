@@ -32,10 +32,6 @@ public class Engine {
             GameRenderer.renderAllLayersToFramebuffer();
             GameRenderer.renderMainLayerAndChildrenByName(RenderLayerName.FRAME_BUFFER);
             window.getTerminal().repaint();
-            if(GlobalEventManager.collisionEventListener.hasRecivedEvent())
-            {
-                JIALogger.info(GlobalEventManager.collisionEventListener.getCollidedEntityEventResult().getyPos() + "XPOS");
-            }
         }
     }
 }

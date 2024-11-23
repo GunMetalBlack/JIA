@@ -3,7 +3,7 @@ package org.gunmetalblack;
 import asciiPanel.AsciiFont;
 import asciiPanel.AsciiPanel;
 import org.gunmetalblack.events.GlobalEventManager;
-import org.gunmetalblack.events.listeners.CollisionEventListener;
+
 
 import javax.swing.*;
 
@@ -20,7 +20,8 @@ public class Init extends JFrame {
         add(terminal);
         pack();
         //Instantiate Event Listeners:
-        GlobalEventManager.collisionEventManager.addEventListener(GlobalEventManager.collisionEventListener);
+        // Temp testing
+        //GlobalEventManager.collisionEventManager.addEventListener(GlobalEventManager.collisionEventListener);
     }
 
     // Getter for the terminal, so InputManager can write to it

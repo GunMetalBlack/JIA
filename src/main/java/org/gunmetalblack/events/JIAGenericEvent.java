@@ -1,11 +1,11 @@
 package org.gunmetalblack.events;
 /*
-This is inspired by minecraft's event system hopefully implemented correctly XD
+This is inspired by minecraft's forges event system hopefully implemented correctly XD
 * */
-public class JIAGenticEvent <E>{
+public class JIAGenericEvent<E>{
     private E event;
 
-    public JIAGenticEvent(E event)
+    public JIAGenericEvent(E event)
     {
         this.event = event;
     }

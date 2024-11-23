@@ -19,7 +19,7 @@ public class JIAEventManager<E> {
 
     // Execute an event to notify all listeners
     public void ExecuteEvent(E source) {
-        JIAGenticEvent<E> event = new JIAGenticEvent<>(source);
+        JIAGenericEvent<E> event = new JIAGenericEvent<>(source);
         for (JIAEventListener<E> listener : listeners) {
             listener.OnJIAEvent(event);
         }

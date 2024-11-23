@@ -1,6 +1,9 @@
 package org.gunmetalblack.entity;
 
 import asciiPanel.AsciiCharacterData;
+import org.gunmetalblack.events.CollisionEvent;
+import org.gunmetalblack.events.GlobalEventManager;
+import org.gunmetalblack.events.JIAGenericEvent;
 
 import java.awt.*;
 
@@ -28,7 +31,12 @@ public class Entity {
         this.yPos = yPos;
         this.graphic = new AsciiCharacterData(character, foregroundColor, backgroundColor);
         this.canCollide = canCollide;
+        if(this.canCollide)
+        {
+            GlobalEventManager.collisionEventManager.addEventListener(this::onCollisionEvent);
+        }
     }
+
 
     /**
      * Constructs an Entity with specified ASCII character and position, using default colors.
@@ -40,10 +48,7 @@ public class Entity {
      * @param canCollide the value on instantiation that determines how it interacts with other entities when colliding
      */
     public Entity(char character, int xPos, int yPos, boolean canCollide) {
-        this.xPos = xPos;
-        this.yPos = yPos;
-        this.graphic = new AsciiCharacterData(character, Color.WHITE, Color.black);
-        this.canCollide = canCollide;
+        this(character,Color.white, Color.black, xPos, yPos, canCollide);
     }
 
     /**
@@ -55,6 +60,15 @@ public class Entity {
      */
     public Entity(char character, Color foregroundColor, Color backgroundColor) {
         this.graphic = new AsciiCharacterData(character, foregroundColor, backgroundColor);
+    }
+
+    public void onCollisionEvent(JIAGenericEvent<CollisionEvent> wrapper)
+    {
+        CollisionEvent event = wrapper.getEvent();
+        if(event.getxPos() == getxPos() && event.getyPos() == getyPos())
+        {
+            event.getCollisions().add(this);
+        }
     }
 
     /**

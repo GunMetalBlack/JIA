@@ -4,6 +4,7 @@ import org.gunmetalblack.Init;
 import org.gunmetalblack.entity.Entity;
 import org.gunmetalblack.entity.LivingEntitiyManager;
 import org.gunmetalblack.entity.LivingEntity;
+import org.gunmetalblack.events.CollisionEvent;
 import org.gunmetalblack.events.GlobalEventManager;
 
 import java.awt.event.KeyListener;
@@ -28,56 +29,24 @@ public class InputManager implements KeyListener {
 
         //TODO: Write collison for the player
 
-        //Ps this shit is jank as sin
+        //Ps this is jank as sin
         //This is an attempt to make the code more readable! Please Forgive my war crimes
         //Getting entites on the mainlayer
-        Entity[][] entitiesOnTheMainGameLayer = livingEntitiyManager.getLivingLayer().getParentLayer().getEntitiesInLayer();
-        Entity possibleCollisonObject;
         LivingEntity player = livingEntitiyManager.player;
         if (keyCode == KeyEvent.VK_W) {
-            possibleCollisonObject = entitiesOnTheMainGameLayer[player.getyPos()-1][player.getxPos()];
-            if(!(possibleCollisonObject.canCollide()))
-            {
-                player.setyPos(livingEntitiyManager.player.getyPos()-1);
-            }
-            else
-            {
-                GlobalEventManager.collisionEventManager.ExecuteEvent(possibleCollisonObject);
+            player.move(0,-1);
+        }
+        else if (keyCode == KeyEvent.VK_D)
+        {
+                player.move(1,0);
+        }
+        else if (keyCode == KeyEvent.VK_A) {
+            player.move(-1,0);
+        }
+        else if (keyCode == KeyEvent.VK_S) {
+                player.move(0,1);
             }
         }
-        else if (keyCode == KeyEvent.VK_D){
-            possibleCollisonObject = entitiesOnTheMainGameLayer[player.getyPos()][player.getxPos()+1];
-            if(!(possibleCollisonObject.canCollide()))
-            {
-
-                player.setxPos(livingEntitiyManager.player.getxPos()+1);
-            }
-            else
-            {
-                GlobalEventManager.collisionEventManager.ExecuteEvent(possibleCollisonObject);
-            }
-        } else if (keyCode == KeyEvent.VK_A) {
-            possibleCollisonObject = entitiesOnTheMainGameLayer[player.getyPos()][player.getxPos()-1];
-            if(!(possibleCollisonObject.canCollide()))
-            {
-                player.setxPos(livingEntitiyManager.player.getxPos()-1);
-            }
-            else
-            {
-                GlobalEventManager.collisionEventManager.ExecuteEvent(possibleCollisonObject);
-            }
-        } else if (keyCode == KeyEvent.VK_S) {
-            possibleCollisonObject = entitiesOnTheMainGameLayer[player.getyPos()+1][player.getxPos()];
-            if(!(possibleCollisonObject.canCollide()))
-            {
-                player.setyPos(livingEntitiyManager.player.getyPos()+1);
-            }
-            else
-            {
-                GlobalEventManager.collisionEventManager.ExecuteEvent(possibleCollisonObject);
-            }
-        }
-    }
 
     @Override
     public void keyReleased(KeyEvent e) {
@@ -87,4 +56,5 @@ public class InputManager implements KeyListener {
     public void setLivingEntitiyManager(LivingEntitiyManager livingEntitiyManager) {
         this.livingEntitiyManager = livingEntitiyManager;
     }
+
 }
