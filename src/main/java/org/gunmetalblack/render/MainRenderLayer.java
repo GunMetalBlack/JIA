@@ -9,7 +9,7 @@ public class MainRenderLayer extends RenderLayer{
 
     private HashMap<RenderLayerName,ChildRenderLayer> layers = new HashMap<>();
 
-    public MainRenderLayer(RenderLayerName layerName, Entity[][] renderObjects, int maxColumns, int maxRows) {
+    public MainRenderLayer(RenderLayerName layerName, ArrayList<Entity> renderObjects, int maxColumns, int maxRows) {
         super(layerName, renderObjects, maxColumns, maxRows);
     }
 

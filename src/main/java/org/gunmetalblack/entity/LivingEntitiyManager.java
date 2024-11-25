@@ -12,6 +12,7 @@ public class LivingEntitiyManager {
     public LivingEntitiyManager(ChildRenderLayer livingLayer)
     {
         this.livingLayer = livingLayer;
+<<<<<<< Updated upstream
         Entity pSpawn = null;
         Entity[][] entities = livingLayer.getParentLayer().getEntitiesInLayer();
         for (int i = 0; i < entities.length; i++) {
@@ -31,6 +32,10 @@ public class LivingEntitiyManager {
 
     public static ChildRenderLayer getLivingLayer() {
         return livingLayer;
+=======
+        //Instantiate All Living entities here
+        player = new LivingEntity((char)1, Color.YELLOW,Color.black,0,0, livingLayer);
+>>>>>>> Stashed changes
     }
 
     public void instantiateLivingEntity(RenderLayer layer, Entity e)

@@ -2,20 +2,26 @@ package org.gunmetalblack.render;
 
 import org.gunmetalblack.entity.Entity;
 
+import java.util.ArrayList;
+
 public class RenderLayer{
 
-    private Entity[][] renderObjects;
+    private ArrayList<Entity> renderObjects;
     private RenderLayerName layerName;
 
     private int maxColumns;
     private int maxRows;
 
-    public RenderLayer(RenderLayerName layerName, Entity[][] renderObjects, int maxColumns, int maxRows)
+    public RenderLayer(RenderLayerName layerName, ArrayList<Entity> renderObjects, int maxColumns, int maxRows)
     {
         this.renderObjects = renderObjects;
         this.layerName = layerName;
         this.maxColumns = maxColumns;
         this.maxRows = maxRows;
+        if(renderObjects.size() > (maxColumns * maxRows))
+        {
+            throw new Error("Catastrophic Render Error: the expected render size is exceeded by renderObjectSize!");
+        }
     }
 
     public RenderLayerName getLayerName() {
@@ -27,11 +33,11 @@ public class RenderLayer{
     }
 
 
-    public Entity[][] getEntitiesInLayer() {
+    public ArrayList<Entity> getEntitiesInLayer() {
         return renderObjects;
     }
 
-    public void setRenderObjects(Entity[][] renderObjects) {
+    public void setRenderObjects(ArrayList<Entity> renderObjects) {
         this.renderObjects = renderObjects;
     }
 

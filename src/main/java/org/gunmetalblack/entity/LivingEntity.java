@@ -33,6 +33,8 @@ public class LivingEntity extends Entity{
         }
     }
 
+    
+
     /**
      * Sets the x-coordinate of the entity.
      *
@@ -46,6 +48,7 @@ public class LivingEntity extends Entity{
         livingLayer.getEntitiesInLayer()[super.getyPos()][super.getxPos()] = this;
 
     }
+
 
     /**
      * Sets the y-coordinate of the entity.

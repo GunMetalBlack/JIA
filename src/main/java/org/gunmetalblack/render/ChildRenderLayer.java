@@ -2,9 +2,11 @@ package org.gunmetalblack.render;
 
 import org.gunmetalblack.entity.Entity;
 
+import java.util.ArrayList;
+
 public class ChildRenderLayer extends RenderLayer{
     private RenderLayer ParentLayer;
-    public ChildRenderLayer(RenderLayerName layerName, Entity[][] renderObjects, int maxColumns, int maxRows) {
+    public ChildRenderLayer(RenderLayerName layerName, ArrayList<Entity> renderObjects, int maxColumns, int maxRows) {
         super(layerName, renderObjects, maxColumns, maxRows);
     }
 

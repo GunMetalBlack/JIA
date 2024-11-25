@@ -3,6 +3,7 @@ package org.gunmetalblack.render;
 import org.gunmetalblack.Init;
 import org.gunmetalblack.entity.Entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -25,9 +26,9 @@ public class Render {
         /*
          * Initializes the framebuffer and the main game layer with sub-layers.
          */
-        frameBuffer = new MainRenderLayer(RenderLayerName.FRAME_BUFFER, new Entity[60][80], 80, 60);
+        frameBuffer = new MainRenderLayer(RenderLayerName.FRAME_BUFFER, new ArrayList<Entity>(), 80, 60);
         mainGameLayer = new MainRenderLayer(RenderLayerName.GAME_LAYER, Level.testLevel.getLevel(), 40, 30);
-        createChildRenderLayer(mainGameLayer, RenderLayerName.GL_LIVING_ENTITY_LAYER, new Entity[mainGameLayer.getMaxRows()][mainGameLayer.getMaxColumns()]);
+        createChildRenderLayer(mainGameLayer, RenderLayerName.GL_LIVING_ENTITY_LAYER, new ArrayList<Entity>());
         layerToBeRendered.put(RenderLayerName.GAME_LAYER, mainGameLayer);
     }
 
@@ -169,7 +170,7 @@ public class Render {
      * @param name the name of the child layer.
      * @param renderObjects the 2D array of entities for the child layer.
      */
-    public void createChildRenderLayer(MainRenderLayer mLayer, RenderLayerName name, Entity[][] renderObjects) {
+    public void createChildRenderLayer(MainRenderLayer mLayer, RenderLayerName name, ArrayList<Entity> renderObjects) {
         ChildRenderLayer cLayer = new ChildRenderLayer(name, renderObjects, mLayer.getMaxColumns(), mLayer.getMaxRows());
         cLayer.setParentLayer(mLayer);
         mLayer.addChildLayer(name, cLayer);
