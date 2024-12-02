@@ -37,6 +37,20 @@ public class RenderLayer{
         return renderObjects;
     }
 
+    /*
+    * This function converts the Array list into a 2d array for the use of rendering
+    * Yes I know this is disgustingly inefficient but I don't have enough time to rework the rendering system
+    * */
+    public Entity[][] getEntitiesInLayerAsArray()
+    {
+        Entity[][] ar = new Entity[maxColumns][maxRows];
+        for(Entity entity : getEntitiesInLayer())
+        {
+            ar[entity.getyPos()][entity.getxPos()] = entity;
+        }
+        return ar;
+    }
+
     public void setRenderObjects(ArrayList<Entity> renderObjects) {
         this.renderObjects = renderObjects;
     }

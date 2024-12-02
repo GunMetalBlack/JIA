@@ -41,9 +41,9 @@ public class Render {
         for (MainRenderLayer layer : layerToBeRendered.values()) {
             if (layer.getLayerName().equals(layerName)) {
                 // Renders the main layer and its child layers
-                renderEntityArray(layer.getEntitiesInLayer(), layer.getMaxColumns(), layer.getMaxRows());
+                renderEntityArray(layer.getEntitiesInLayerAsArray(), layer.getMaxColumns(), layer.getMaxRows());
                 for (ChildRenderLayer childLayer : layer.getLayers().values()) {
-                    renderEntityArray(childLayer.getEntitiesInLayer(), childLayer.getMaxColumns(), childLayer.getMaxRows());
+                    renderEntityArray(childLayer.getEntitiesInLayerAsArray(), childLayer.getMaxColumns(), childLayer.getMaxRows());
                 }
             }
         }
@@ -61,7 +61,7 @@ public class Render {
             for (int j = 0; j < objectToBeRendered[i].length; j++) {
                 Entity entity = objectToBeRendered[i][j];
                 if (entity != null) {
-                    frameBuffer.getEntitiesInLayer()[i][j] = entity;
+                    frameBuffer.getEntitiesInLayerAsArray()[i][j] = entity;
                 }
             }
         }
@@ -75,21 +75,21 @@ public class Render {
 
         // Render each main layer and its children
         for (MainRenderLayer layer : layerToBeRendered.values()) {
-            renderToFramebuffer(layer.getEntitiesInLayer(), layer.getMaxColumns(), layer.getMaxRows());
+            renderToFramebuffer(layer.getEntitiesInLayerAsArray(), layer.getMaxColumns(), layer.getMaxRows());
 
             for (ChildRenderLayer childLayer : layer.getLayers().values()) {
-                renderToFramebuffer(childLayer.getEntitiesInLayer(), childLayer.getMaxColumns(), childLayer.getMaxRows());
+                renderToFramebuffer(childLayer.getEntitiesInLayerAsArray(), childLayer.getMaxColumns(), childLayer.getMaxRows());
             }
         }
 
-        renderEntityArray(frameBuffer.getEntitiesInLayer(), frameBuffer.getMaxColumns(), frameBuffer.getMaxRows());
+        renderEntityArray(frameBuffer.getEntitiesInLayerAsArray(), frameBuffer.getMaxColumns(), frameBuffer.getMaxRows());
     }
 
     /**
      * Clears the framebuffer by setting all cells to {@code null}.
      */
     public void clearFramebuffer() {
-        Entity[][] entities = frameBuffer.getEntitiesInLayer();
+        Entity[][] entities = frameBuffer.getEntitiesInLayerAsArray();
         for (int i = 0; i < entities.length; i++) {
             for (int j = 0; j < entities[i].length; j++) {
                 entities[i][j] = null;
@@ -107,7 +107,7 @@ public class Render {
 
         for (MainRenderLayer layer : layerToBeRendered.values()) {
             if (layer.getLayerName().equals(layerName)) {
-                renderEntityArray(layer.getEntitiesInLayer(), layer.getMaxColumns(), layer.getMaxRows());
+                renderEntityArray(layer.getEntitiesInLayerAsArray(), layer.getMaxColumns(), layer.getMaxRows());
                 layerFound = true;
                 break;
             }
@@ -117,7 +117,7 @@ public class Render {
             for (MainRenderLayer layer : layerToBeRendered.values()) {
                 for (ChildRenderLayer childLayer : layer.getLayers().values()) {
                     if (childLayer.getLayerName().equals(layerName)) {
-                        renderEntityArray(childLayer.getEntitiesInLayer(), childLayer.getMaxColumns(), childLayer.getMaxRows());
+                        renderEntityArray(childLayer.getEntitiesInLayerAsArray(), childLayer.getMaxColumns(), childLayer.getMaxRows());
                         layerFound = true;
                         break;
                     }

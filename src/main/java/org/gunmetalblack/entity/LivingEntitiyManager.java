@@ -32,10 +32,6 @@ public class LivingEntitiyManager {
 
     public static ChildRenderLayer getLivingLayer() {
         return livingLayer;
-=======
-        //Instantiate All Living entities here
-        player = new LivingEntity((char)1, Color.YELLOW,Color.black,0,0, livingLayer);
->>>>>>> Stashed changes
     }
 
     public void instantiateLivingEntity(RenderLayer layer, Entity e)
