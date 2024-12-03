@@ -7,7 +7,7 @@ import org.gunmetalblack.render.RenderLayer;
 import org.gunmetalblack.tools.JIALogger;
 
 import java.awt.*;
-import java.util.ArrayList;
+
 
 public class LivingEntity extends Entity {
     private RenderLayer livingLayer;
