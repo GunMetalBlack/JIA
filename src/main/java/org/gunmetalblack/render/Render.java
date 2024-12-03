@@ -147,7 +147,7 @@ public class Render {
             for (int j = 0; j < objectToBeRendered[i].length; j++) {
                 Entity entity = objectToBeRendered[i][j];
                 if (entity != null) {
-                    window.getTerminal().write(entity.getGraphic().character, columns, rows);
+                    window.getTerminal().write(entity.getGraphic(), columns, rows);
                 }
 
                 columns++;

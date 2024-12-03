@@ -25,9 +25,9 @@ public class LivingEntity extends Entity {
      */
     public void move(int relativeX, int relativeY) {
         CollisionEvent collisionEvent = new CollisionEvent(getxPos() + relativeX, getyPos() + relativeY);
-        GlobalEventManager.collisionEventManager.ExecuteEvent(collisionEvent);
+        GlobalEventManager.collisionEventManager.<CollisionEvent>ExecuteEvent(collisionEvent);
         collisionEvent.getCollisions().remove(this);
-        JIALogger.log(JIALogger.LogLevel.WARN, collisionEvent.getCollisions() + "");
+        //JIALogger.log(JIALogger.LogLevel.WARN, collisionEvent.getCollisions() + "");
         if (collisionEvent.getCollisions().isEmpty()) {
             setxPos(getxPos() + relativeX);
             setyPos(getyPos() + relativeY);

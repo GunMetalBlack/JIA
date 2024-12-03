@@ -64,7 +64,7 @@ public class Entity {
 
     public void onCollisionEvent(JIAGenericEvent<CollisionEvent> wrapper)
     {
-        CollisionEvent event = wrapper.getEvent();
+        CollisionEvent event = wrapper.<CollisionEvent>getEvent();
         if(event.getxPos() == getxPos() && event.getyPos() == getyPos())
         {
             event.getCollisions().add(this);
