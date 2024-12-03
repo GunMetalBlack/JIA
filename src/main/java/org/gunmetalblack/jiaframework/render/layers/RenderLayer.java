@@ -1,6 +1,7 @@
-package org.gunmetalblack.jiaframework.render;
+package org.gunmetalblack.jiaframework.render.layers;
 
 import org.gunmetalblack.jiaframework.entity.Entity;
+import org.gunmetalblack.jiaframework.render.RenderLayerName;
 
 import java.util.ArrayList;
 

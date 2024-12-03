@@ -2,6 +2,10 @@ package org.gunmetalblack.jiaframework.render;
 
 import org.gunmetalblack.Init;
 import org.gunmetalblack.jiaframework.entity.Entity;
+import org.gunmetalblack.jiaframework.render.layers.ChildRenderLayer;
+import org.gunmetalblack.jiaframework.render.layers.FrameBufferRenderLayer;
+import org.gunmetalblack.jiaframework.render.layers.MainRenderLayer;
+import org.gunmetalblack.jiaframework.render.layers.UserInterfaceRenderLayer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +19,7 @@ public class Render {
     public HashMap<RenderLayerName, MainRenderLayer> layerToBeRendered = new HashMap<>();
     public static MainRenderLayer mainGameLayer;
     public static FrameBufferRenderLayer frameBuffer;
+    public static UserInterfaceRenderLayer horizontalUILayer;
 
     /**
      * Constructs a new {@code Render} object.
@@ -28,8 +33,10 @@ public class Render {
          */
         frameBuffer = new FrameBufferRenderLayer(RenderLayerName.FRAME_BUFFER, new ArrayList<Entity>(), 80, 60);
         mainGameLayer = new MainRenderLayer(RenderLayerName.GAME_LAYER, Level.testLevel.getLevel(), 40, 30);
+        horizontalUILayer = new UserInterfaceRenderLayer(RenderLayerName.UI_HORIZONTAL_LAYER, new ArrayList<Entity>(),30,20);
         createChildRenderLayer(mainGameLayer, RenderLayerName.GL_LIVING_ENTITY_LAYER, new ArrayList<Entity>());
         layerToBeRendered.put(RenderLayerName.GAME_LAYER, mainGameLayer);
+        layerToBeRendered.put(RenderLayerName.UI_HORIZONTAL_LAYER,horizontalUILayer);
     }
 
     /**
@@ -56,13 +63,13 @@ public class Render {
      * @param maxColumns the maximum number of columns to render.
      * @param maxRows the maximum number of rows to render.
      */
-    public void renderToFramebuffer(Entity[][] objectToBeRendered, int maxColumns, int maxRows) {
+    public void renderToFramebuffer(Entity[][] objectToBeRendered, int xOffset, int yOffset) {
         for (int i = 0; i < objectToBeRendered.length; i++) {
             for (int j = 0; j < objectToBeRendered[i].length; j++) {
                 Entity entity = objectToBeRendered[i][j];
                 if (entity != null) {
                     //REMEMBER THIS IS JANK AND CAUSED
-                    frameBuffer.getEntitiesInLayerAsArray()[i][j] = entity;
+                    frameBuffer.getEntitiesInLayerAsArray()[i + yOffset][j + xOffset] = entity;
                 }
             }
         }
@@ -76,10 +83,13 @@ public class Render {
 
         // Render each main layer and its children
         for (MainRenderLayer layer : layerToBeRendered.values()) {
-            renderToFramebuffer(layer.getEntitiesInLayerAsArray(), layer.getMaxColumns(), layer.getMaxRows());
+            if(layer.getLayerName() == RenderLayerName.UI_HORIZONTAL_LAYER) {
+                renderToFramebuffer(layer.getEntitiesInLayerAsArray(), 0, mainGameLayer.getMaxRows());
+            }
+            else{renderToFramebuffer(layer.getEntitiesInLayerAsArray(), 0, 0);}
 
             for (ChildRenderLayer childLayer : layer.getLayers().values()) {
-                renderToFramebuffer(childLayer.getEntitiesInLayerAsArray(), childLayer.getMaxColumns(), childLayer.getMaxRows());
+                renderToFramebuffer(childLayer.getEntitiesInLayerAsArray(), 0, 0);
             }
         }
         renderEntityArray(frameBuffer.getEntitiesInLayerAsArray(), frameBuffer.getMaxColumns(), frameBuffer.getMaxRows());
@@ -138,7 +148,7 @@ public class Render {
      * @param maxColumns the maximum number of columns to render.
      * @param maxRows the maximum number of rows to render.
      */
-    public void renderEntityArray(Entity[][] objectToBeRendered, int maxColumns, int maxRows) {
+    public void   renderEntityArray(Entity[][] objectToBeRendered, int maxColumns, int maxRows) {
         int columns = 0;
         int rows = 0;
 

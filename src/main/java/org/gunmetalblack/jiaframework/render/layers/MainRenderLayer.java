@@ -1,13 +1,14 @@
-package org.gunmetalblack.jiaframework.render;
+package org.gunmetalblack.jiaframework.render.layers;
 
 import org.gunmetalblack.jiaframework.entity.Entity;
+import org.gunmetalblack.jiaframework.render.RenderLayerName;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainRenderLayer extends RenderLayer{
+public class MainRenderLayer extends RenderLayer {
 
-    private HashMap<RenderLayerName,ChildRenderLayer> layers = new HashMap<>();
+    private HashMap<RenderLayerName, ChildRenderLayer> layers = new HashMap<>();
 
     public MainRenderLayer(RenderLayerName layerName, ArrayList<Entity> renderObjects, int maxColumns, int maxRows) {
         super(layerName, renderObjects, maxColumns, maxRows);

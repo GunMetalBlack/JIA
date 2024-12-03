@@ -1,6 +1,6 @@
 package org.gunmetalblack.jiaframework.entity;
 
-import org.gunmetalblack.jiaframework.render.ChildRenderLayer;
+import org.gunmetalblack.jiaframework.render.layers.ChildRenderLayer;
 
 import java.awt.*;
 
