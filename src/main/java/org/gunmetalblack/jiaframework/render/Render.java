@@ -33,7 +33,7 @@ public class Render {
          */
         frameBuffer = new FrameBufferRenderLayer(RenderLayerName.FRAME_BUFFER, new ArrayList<Entity>(), 80, 60);
         mainGameLayer = new MainRenderLayer(RenderLayerName.GAME_LAYER, Level.testLevel.getLevel(), 40, 30);
-        horizontalUILayer = new UserInterfaceRenderLayer(RenderLayerName.UI_HORIZONTAL_LAYER, new ArrayList<Entity>(),30,20);
+        horizontalUILayer = new UserInterfaceRenderLayer(RenderLayerName.UI_HORIZONTAL_LAYER, new ArrayList<Entity>(),80,20);
         createChildRenderLayer(mainGameLayer, RenderLayerName.GL_LIVING_ENTITY_LAYER, new ArrayList<Entity>());
         layerToBeRendered.put(RenderLayerName.GAME_LAYER, mainGameLayer);
         layerToBeRendered.put(RenderLayerName.UI_HORIZONTAL_LAYER,horizontalUILayer);
