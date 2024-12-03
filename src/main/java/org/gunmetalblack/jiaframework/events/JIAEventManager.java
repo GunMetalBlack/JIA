@@ -1,4 +1,4 @@
-package org.gunmetalblack.events;
+package org.gunmetalblack.jiaframework.events;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,11 +1,8 @@
-package org.gunmetalblack.input;
+package org.gunmetalblack.jiaframework.input;
 
 import org.gunmetalblack.Init;
-import org.gunmetalblack.entity.Entity;
-import org.gunmetalblack.entity.LivingEntitiyManager;
-import org.gunmetalblack.entity.LivingEntity;
-import org.gunmetalblack.events.CollisionEvent;
-import org.gunmetalblack.events.GlobalEventManager;
+import org.gunmetalblack.jiaframework.entity.LivingEntitiyManager;
+import org.gunmetalblack.jiaframework.entity.LivingEntity;
 
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;

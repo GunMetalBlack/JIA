@@ -1,16 +1,18 @@
-package org.gunmetalblack.render;
+package org.gunmetalblack.jiaframework.render;
 
-import org.gunmetalblack.entity.Entity;
+import org.gunmetalblack.jiaframework.entity.Entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainRenderLayer extends RenderLayer{
+public class FrameBufferRenderLayer extends  MainRenderLayer{
+    private Entity[][] renderObjectsFrameBuffer;
 
     private HashMap<RenderLayerName,ChildRenderLayer> layers = new HashMap<>();
 
-    public MainRenderLayer(RenderLayerName layerName, ArrayList<Entity> renderObjects, int maxColumns, int maxRows) {
+    public FrameBufferRenderLayer(RenderLayerName layerName, ArrayList<Entity> renderObjects, int maxColumns, int maxRows) {
         super(layerName, renderObjects, maxColumns, maxRows);
+        renderObjectsFrameBuffer = new Entity[maxRows][maxColumns];
     }
 
     public ChildRenderLayer getChildLayer(RenderLayerName name) {
@@ -23,5 +25,11 @@ public class MainRenderLayer extends RenderLayer{
 
     public void addChildLayer(RenderLayerName name,ChildRenderLayer layer) {
         this.layers.put(name,layer);
+    }
+
+    @Override
+    public Entity[][] getEntitiesInLayerAsArray()
+    {
+         return renderObjectsFrameBuffer;
     }
 }

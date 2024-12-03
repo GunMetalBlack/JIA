@@ -1,8 +1,7 @@
-package org.gunmetalblack.entity;
+package org.gunmetalblack.jiaframework.entity;
 
-import org.gunmetalblack.render.ChildRenderLayer;
-import org.gunmetalblack.render.RenderLayer;
-import org.gunmetalblack.tools.JIALogger;
+import org.gunmetalblack.jiaframework.render.ChildRenderLayer;
+import org.gunmetalblack.jiaframework.render.RenderLayer;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package org.gunmetalblack.events;
+package org.gunmetalblack.jiaframework.events;
 /*
 This is inspired by minecraft's forges event system hopefully implemented correctly XD
 * */

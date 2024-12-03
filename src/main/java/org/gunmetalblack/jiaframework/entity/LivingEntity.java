@@ -1,10 +1,9 @@
-package org.gunmetalblack.entity;
+package org.gunmetalblack.jiaframework.entity;
 
-import org.gunmetalblack.events.CollisionEvent;
-import org.gunmetalblack.events.GlobalEventManager;
-import org.gunmetalblack.render.ChildRenderLayer;
-import org.gunmetalblack.render.RenderLayer;
-import org.gunmetalblack.tools.JIALogger;
+import org.gunmetalblack.jiaframework.events.CollisionEvent;
+import org.gunmetalblack.jiaframework.events.GlobalEventManager;
+import org.gunmetalblack.jiaframework.render.ChildRenderLayer;
+import org.gunmetalblack.jiaframework.render.RenderLayer;
 
 import java.awt.*;
 

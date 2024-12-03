@@ -2,7 +2,6 @@ package org.gunmetalblack;
 
 import asciiPanel.AsciiFont;
 import asciiPanel.AsciiPanel;
-import org.gunmetalblack.events.GlobalEventManager;
 
 
 import javax.swing.*;

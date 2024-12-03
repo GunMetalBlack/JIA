@@ -1,11 +1,9 @@
-package org.gunmetalblack.render;
+package org.gunmetalblack.jiaframework.render;
 
 import org.gunmetalblack.Init;
-import org.gunmetalblack.entity.Entity;
-import org.gunmetalblack.tools.JIALogger;
+import org.gunmetalblack.jiaframework.entity.Entity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -63,6 +61,7 @@ public class Render {
             for (int j = 0; j < objectToBeRendered[i].length; j++) {
                 Entity entity = objectToBeRendered[i][j];
                 if (entity != null) {
+                    //REMEMBER THIS IS JANK AND CAUSED
                     frameBuffer.getEntitiesInLayerAsArray()[i][j] = entity;
                 }
             }

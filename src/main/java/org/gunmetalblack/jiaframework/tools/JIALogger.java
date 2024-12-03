@@ -1,4 +1,4 @@
-package org.gunmetalblack.tools;
+package org.gunmetalblack.jiaframework.tools;
 
 import java.io.FileWriter;
 import java.io.IOException;

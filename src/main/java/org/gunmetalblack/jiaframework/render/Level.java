@@ -1,6 +1,6 @@
-package org.gunmetalblack.render;
+package org.gunmetalblack.jiaframework.render;
 
-import org.gunmetalblack.entity.Entity;
+import org.gunmetalblack.jiaframework.entity.Entity;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -13,7 +13,7 @@ public class Level {
     // HashMap to store specific RGB to ASCII character mappings
     private static final HashMap<Color, String> colorToAsciiMap = new HashMap<>();
     public static Level testLevel = new Level("test.png");
-    private ArrayList<Entity> level = new ArrayList<Entity>();
+    private ArrayList<Entity> level = new ArrayList<>();
 
     public Level(String imageName) {
         // Define specific RGB to ASCII character mappings

@@ -1,9 +1,9 @@
-package org.gunmetalblack.entity;
+package org.gunmetalblack.jiaframework.entity;
 
 import asciiPanel.AsciiCharacterData;
-import org.gunmetalblack.events.CollisionEvent;
-import org.gunmetalblack.events.GlobalEventManager;
-import org.gunmetalblack.events.JIAGenericEvent;
+import org.gunmetalblack.jiaframework.events.CollisionEvent;
+import org.gunmetalblack.jiaframework.events.GlobalEventManager;
+import org.gunmetalblack.jiaframework.events.JIAGenericEvent;
 
 import java.awt.*;
 

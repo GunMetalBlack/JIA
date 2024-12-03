@@ -1,11 +1,10 @@
-package org.gunmetalblack;
+package org.gunmetalblack.jiaframework;
 
-import org.gunmetalblack.entity.LivingEntitiyManager;
-import org.gunmetalblack.events.GlobalEventManager;
-import org.gunmetalblack.input.InputManager;
-import org.gunmetalblack.render.Render;
-import org.gunmetalblack.render.RenderLayerName;
-import org.gunmetalblack.tools.JIALogger;
+import org.gunmetalblack.Init;
+import org.gunmetalblack.jiaframework.entity.LivingEntitiyManager;
+import org.gunmetalblack.jiaframework.input.InputManager;
+import org.gunmetalblack.jiaframework.render.Render;
+import org.gunmetalblack.jiaframework.render.RenderLayerName;
 
 public class Engine {
     private Init window;

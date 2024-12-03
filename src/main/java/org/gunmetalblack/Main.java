@@ -1,6 +1,7 @@
 package org.gunmetalblack;
 
-import org.gunmetalblack.input.InputManager;
+import org.gunmetalblack.jiaframework.input.InputManager;
+import org.gunmetalblack.jiaframework.Engine;
 
 import javax.swing.*;
 

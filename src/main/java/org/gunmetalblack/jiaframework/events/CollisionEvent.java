@@ -1,6 +1,6 @@
-package org.gunmetalblack.events;
+package org.gunmetalblack.jiaframework.events;
 
-import org.gunmetalblack.entity.Entity;
+import org.gunmetalblack.jiaframework.entity.Entity;
 
 import java.util.ArrayList;
 
