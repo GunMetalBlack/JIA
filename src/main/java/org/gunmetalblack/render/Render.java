@@ -2,8 +2,10 @@ package org.gunmetalblack.render;
 
 import org.gunmetalblack.Init;
 import org.gunmetalblack.entity.Entity;
+import org.gunmetalblack.tools.JIALogger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -14,7 +16,7 @@ public class Render {
     private Init window;
     public HashMap<RenderLayerName, MainRenderLayer> layerToBeRendered = new HashMap<>();
     public static MainRenderLayer mainGameLayer;
-    public static MainRenderLayer frameBuffer;
+    public static FrameBufferRenderLayer frameBuffer;
 
     /**
      * Constructs a new {@code Render} object.
@@ -26,7 +28,7 @@ public class Render {
         /*
          * Initializes the framebuffer and the main game layer with sub-layers.
          */
-        frameBuffer = new MainRenderLayer(RenderLayerName.FRAME_BUFFER, new ArrayList<Entity>(), 80, 60);
+        frameBuffer = new FrameBufferRenderLayer(RenderLayerName.FRAME_BUFFER, new ArrayList<Entity>(), 80, 60);
         mainGameLayer = new MainRenderLayer(RenderLayerName.GAME_LAYER, Level.testLevel.getLevel(), 40, 30);
         createChildRenderLayer(mainGameLayer, RenderLayerName.GL_LIVING_ENTITY_LAYER, new ArrayList<Entity>());
         layerToBeRendered.put(RenderLayerName.GAME_LAYER, mainGameLayer);
@@ -81,7 +83,6 @@ public class Render {
                 renderToFramebuffer(childLayer.getEntitiesInLayerAsArray(), childLayer.getMaxColumns(), childLayer.getMaxRows());
             }
         }
-
         renderEntityArray(frameBuffer.getEntitiesInLayerAsArray(), frameBuffer.getMaxColumns(), frameBuffer.getMaxRows());
     }
 
@@ -146,7 +147,7 @@ public class Render {
             for (int j = 0; j < objectToBeRendered[i].length; j++) {
                 Entity entity = objectToBeRendered[i][j];
                 if (entity != null) {
-                    window.getTerminal().write(entity.getGraphic(), columns, rows);
+                    window.getTerminal().write(entity.getGraphic().character, columns, rows);
                 }
 
                 columns++;

@@ -122,4 +122,9 @@ public class Entity {
     public void setCanCollide(boolean canCollide) {
         this.canCollide = canCollide;
     }
+
+    @Override
+    public String toString() {
+        return "CustomEntity{name=" + getGraphic() + "}";
+    }
 }

@@ -42,9 +42,9 @@ public class RenderLayer {
      * */
     public Entity[][] getEntitiesInLayerAsArray() {
         Entity[][] ar = new Entity[maxRows][maxColumns];
-        for (Entity entity : getEntitiesInLayer()) {
-            ar[entity.getyPos()][entity.getxPos()] = entity;
-        }
+            for (Entity entity : getEntitiesInLayer()) {
+                ar[entity.getyPos()][entity.getxPos()] = entity;
+            }
         return ar;
     }
 
