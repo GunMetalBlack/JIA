@@ -13,7 +13,7 @@ public class Level {
     // HashMap to store specific RGB to ASCII character mappings
     private static final HashMap<Color, String> colorToAsciiMap = new HashMap<>();
     public static Level testLevel = new Level("test.png");
-    private ArrayList<Entity> level;
+    private ArrayList<Entity> level = new ArrayList<Entity>();
 
     public Level(String imageName) {
         // Define specific RGB to ASCII character mappings

@@ -5,6 +5,7 @@ import org.gunmetalblack.render.RenderLayer;
 import org.gunmetalblack.tools.JIALogger;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class LivingEntitiyManager {
     private static ChildRenderLayer livingLayer;
@@ -12,16 +13,12 @@ public class LivingEntitiyManager {
     public LivingEntitiyManager(ChildRenderLayer livingLayer)
     {
         this.livingLayer = livingLayer;
-<<<<<<< Updated upstream
         Entity pSpawn = null;
-        Entity[][] entities = livingLayer.getParentLayer().getEntitiesInLayer();
-        for (int i = 0; i < entities.length; i++) {
-            for (int j = 0; j < entities[i].length; j++) {
-                Entity entity = entities[i][j];
+        ArrayList<Entity> entities = livingLayer.getParentLayer().getEntitiesInLayer();
+        for (Entity entity : entities) {
                 if (entity.getGraphic().character == '*') {
                     pSpawn = entity;
                 }
-            }
         }
         if(pSpawn == null)
         {
@@ -36,6 +33,6 @@ public class LivingEntitiyManager {
 
     public void instantiateLivingEntity(RenderLayer layer, Entity e)
     {
-        layer.getEntitiesInLayer()[e.getyPos()][e.getxPos()] = e;
+        layer.getEntitiesInLayer().add(e);
     }
 }

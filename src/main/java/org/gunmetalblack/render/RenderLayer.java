@@ -44,12 +44,17 @@ public class RenderLayer{
     public Entity[][] getEntitiesInLayerAsArray()
     {
         Entity[][] ar = new Entity[maxColumns][maxRows];
-        for(Entity entity : getEntitiesInLayer())
-        {
-            ar[entity.getyPos()][entity.getxPos()] = entity;
+        System.out.println("maxColumns: " + maxColumns + ", maxRows: " + maxRows);
+        for (Entity entity : getEntitiesInLayer()) {
+
+            int x = entity.getxPos();
+            int y = entity.getyPos();
+            System.out.println("Entity position: x=" + x + ", y=" + y);
+            }
+            return ar;
         }
-        return ar;
-    }
+
+
 
     public void setRenderObjects(ArrayList<Entity> renderObjects) {
         this.renderObjects = renderObjects;
