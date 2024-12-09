@@ -16,6 +16,10 @@ public class UserInterfaceRenderLayer extends MainRenderLayer{
         writeUIText(1,3, "This is a simple sandbox game that represents a bigger project the JIA engine.");
         writeUIText(1,5, "Its fully built with a entity system and a multi-layer render engine on");
         writeUIText(1,6,"top of a working event system!");
+        writeUIText(1,8,"CONTROLS:");
+        writeUIText(1,9,"W,A,S,D for movement!");
+        writeUIText(1,10,"Enter to place blocks and Shift to break blocks!");
+        writeUIText(1,11,"Use the arrow keys to choose the direction of placement!");
     }
 
 

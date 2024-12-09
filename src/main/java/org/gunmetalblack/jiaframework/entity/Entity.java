@@ -3,6 +3,7 @@ package org.gunmetalblack.jiaframework.entity;
 import asciiPanel.AsciiCharacterData;
 import org.gunmetalblack.jiaframework.events.CollisionEvent;
 import org.gunmetalblack.jiaframework.events.GlobalEventManager;
+import org.gunmetalblack.jiaframework.events.JIAEventListener;
 import org.gunmetalblack.jiaframework.events.JIAGenericEvent;
 
 import java.awt.*;
@@ -16,6 +17,7 @@ public class Entity {
     private boolean isBreakable;
     private boolean canCollide;
     private AsciiCharacterData graphic;
+    private JIAEventListener<CollisionEvent> collisionJIAEventListener;
 
     /**
      * Constructs an Entity with specified ASCII character, foreground color, background color, and position.
@@ -33,12 +35,19 @@ public class Entity {
         this.graphic = new AsciiCharacterData(character, foregroundColor, backgroundColor);
         this.canCollide = canCollide;
         this.isBreakable = isBreakable;
+        this.collisionJIAEventListener = this::onCollisionEvent;
         if(this.canCollide)
         {
-            GlobalEventManager.collisionEventManager.addEventListener(this::onCollisionEvent);
+            GlobalEventManager.collisionEventManager.addEventListener(collisionJIAEventListener);
         }
     }
-
+    /*
+    * Removes the entity from any listeners or other functions
+    * */
+    public void killEntity()
+    {
+        GlobalEventManager.collisionEventManager.removeEventListener(collisionJIAEventListener);
+    }
 
     /**
      * Constructs an Entity with specified ASCII character and position, using default colors.

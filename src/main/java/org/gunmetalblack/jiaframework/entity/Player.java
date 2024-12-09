@@ -8,21 +8,29 @@ import java.util.Iterator;
 
 public class Player extends LivingEntity {
     private static FacingDirection currentDirection;
+    private Entity currentlyHighlightedEntity;
 
     public Player(char character, Color foregroundColor, Color backgroundColor, int xPos, int yPos, ChildRenderLayer livingLayer) {
         super(character, foregroundColor, backgroundColor, xPos, yPos, livingLayer);
         currentDirection = FacingDirection.UP;
     }
 
-    public void highlightCurrentDirection() {
-        int relativeX = getxPos() + currentDirection.getX();
-        int relativeY = getyPos() + currentDirection.getY();
-        for (Entity item : getLivingLayer().getParentLayer().getEntitiesInLayer()) {
-            if (item.getxPos() == relativeX && item.getyPos() == relativeY) {
-                item.getGraphic().backgroundColor = Color.yellow;
-            }
-        }
-    }
+
+//    public void highlightCurrentDirection() {
+//        for (Entity item : getLivingLayer().getParentLayer().getEntitiesInLayer()) {
+//            if (item.equals(currentlyHighlightedEntity)) {
+//                item.getGraphic().backgroundColor = Color.black;
+//            }
+//        }
+//        int relativeX = getxPos() + currentDirection.getX();
+//        int relativeY = getyPos() + currentDirection.getY();
+//        for (Entity item : getLivingLayer().getParentLayer().getEntitiesInLayer()) {
+//            if (item.getxPos() == relativeX && item.getyPos() == relativeY) {
+//                currentlyHighlightedEntity = item;
+//                item.getGraphic().backgroundColor = Color.yellow;
+//            }
+//        }
+//    }
 
     public void manipulateBlock(Boolean shouldPlace) {
         int relativeX = getxPos() + currentDirection.getX();
@@ -37,10 +45,11 @@ public class Player extends LivingEntity {
             if (item.getxPos() == relativeX && item.getyPos() == relativeY) {
                 if (shouldPlace && item.getGraphic().character == (char)176) {
                     toAdd.add(new Entity((char)219, new Color(51, 24, 0), Color.black, item.getxPos(), item.getyPos(), true, true));
-                    toRemove.add(item);  // Mark for removal
+                    toRemove.add(item);
                 } else if (!shouldPlace && item.isBreakable()) {
                     toAdd.add(new Entity((char)176, new Color(58, 191, 22), Color.black, item.getxPos(), item.getyPos(), false, false));
-                    toRemove.add(item);  // Mark for removal
+                    item.killEntity();
+                    toRemove.add(item);
                 }
             }
         }

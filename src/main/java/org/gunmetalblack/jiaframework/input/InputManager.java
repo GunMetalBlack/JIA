@@ -31,7 +31,6 @@ public class InputManager implements KeyListener {
         //This is an attempt to make the code more readable! Please Forgive my war crimes
         //Getting entites on the mainlayer
         Player player = livingEntityManager.player;
-        //player.highlightCurrentDirection();
         if (keyCode == KeyEvent.VK_W) {
             player.move(0, -1);
         } else if (keyCode == KeyEvent.VK_D) {

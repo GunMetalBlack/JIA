@@ -28,9 +28,8 @@ public class Engine {
         livingEntityManager.instantiateLivingEntity(GameRenderer.layerToBeRendered.get(RenderLayerName.GAME_LAYER).getChildLayer(RenderLayerName.GL_LIVING_ENTITY_LAYER), livingEntityManager.player);
         while (true)
         {
-
+    
             GameRenderer.renderAllLayersToFramebuffer();
-            LivingEntityManager.player.highlightCurrentDirection();
             GameRenderer.renderFrameBufferToWindow();
             GameRenderer.renderMainLayerAndChildrenByName(RenderLayerName.FRAME_BUFFER);
             window.getTerminal().repaint();
