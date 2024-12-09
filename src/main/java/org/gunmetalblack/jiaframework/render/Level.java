@@ -85,7 +85,7 @@ public class Level {
             entityToMap = new Entity(' ',0,0,false);
         }else if (entityID.equals("id_floor"))
         {
-            entityToMap = new Entity((char)176,Color.DARK_GRAY,Color.black,0,0,false);
+            entityToMap = new Entity((char)176,Color.GRAY,Color.black,0,0,false);
         }
         return entityToMap;
     }

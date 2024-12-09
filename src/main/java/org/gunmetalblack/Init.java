@@ -16,6 +16,7 @@ public class Init extends JFrame {
         super();
         terminal = new AsciiPanel(80, 60, AsciiFont.CP437_16x16);
         setFocusable(true);
+        setResizable(false);
         add(terminal);
         pack();
         //Instantiate Event Listeners:

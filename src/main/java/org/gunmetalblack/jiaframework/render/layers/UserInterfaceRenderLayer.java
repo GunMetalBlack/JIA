@@ -12,11 +12,34 @@ public class UserInterfaceRenderLayer extends MainRenderLayer{
         super(layerName, renderObjects, maxColumns, maxRows);
         renderObjectsUI = new Entity[maxRows][maxColumns];
         buildBoundingBox();
+        writeUIText(1,1, "Welcome to JIA-Sandbox!");
+        writeUIText(1,3, "This is a simple sandbox game that represents a bigger project the JIA engine.");
+        writeUIText(1,5, "Its fully built with a entity system and a multi-layer render engine on");
+        writeUIText(1,6,"top of a working event system!");
+    }
+
+
+    public void writeUIText(int xPos, int yPos, String message)
+    {
+        for(char c : message.toCharArray())
+        {
+            if(yPos > renderObjectsUI[0].length){yPos++;}
+            if(isWithinBounds(yPos,xPos))
+            {
+                Entity cha = new Entity(c, new Color(0xd0, 0x8c, 0x36), Color.BLACK);
+                renderObjectsUI[yPos][xPos] = cha;
+            }
+            xPos++;
+        }
+    }
+
+    private boolean isWithinBounds(int row, int column) {
+        return row >= 0 && row < renderObjectsUI.length && column >= 0 && column < renderObjectsUI[0].length;
     }
 
     public void buildBoundingBox()
     {
-        Entity boarderEntity =  new Entity('#', Color.GRAY, Color.BLACK);
+        Entity boarderEntity =  new Entity('#', new Color(0x4e, 0x8d, 0xa4), Color.BLACK);
         for(int i = 0; i < getMaxRows(); i++)
         {
             renderObjectsUI[i][0] = boarderEntity;
@@ -24,6 +47,14 @@ public class UserInterfaceRenderLayer extends MainRenderLayer{
         for(int i = 0; i < getMaxRows(); i++)
         {
             renderObjectsUI[i][getMaxColumns()-1] = boarderEntity;
+        }
+        for(int i = 0; i < getMaxColumns(); i++)
+        {
+            renderObjectsUI[getMaxRows()-1][i] = boarderEntity;
+        }
+        for(int i = 0; i < getMaxColumns(); i++)
+        {
+            renderObjectsUI[0][i] = boarderEntity;
         }
     }
 
