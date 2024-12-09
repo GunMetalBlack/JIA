@@ -127,6 +127,9 @@ public class Entity {
         return graphic;
     }
 
+    /*
+    * Is the entity breakable
+    * */
     public boolean isBreakable() {
         return isBreakable;
     }

@@ -19,7 +19,11 @@ public class JIALogger {
         ERROR
     }
 
-
+    /**
+     * Logs a message with varying levels of severity
+     * @param level
+     * @param message
+     */
     public static void log(LogLevel level, String message) {
         String timestamp = LocalDateTime.now().format(DATE_FORMAT);
         String logMessage = String.format("[%s] [%s] %s", timestamp, level, message);

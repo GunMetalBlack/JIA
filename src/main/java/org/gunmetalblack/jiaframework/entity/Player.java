@@ -32,6 +32,10 @@ public class Player extends LivingEntity {
 //        }
 //    }
 
+    /**
+     * Handles placing and destroying blocks for the player
+     * @param shouldPlace should the block be placed or destroyed
+     */
     public void manipulateBlock(Boolean shouldPlace) {
         int relativeX = getxPos() + currentDirection.getX();
         int relativeY = getyPos() + currentDirection.getY();
@@ -69,7 +73,10 @@ public class Player extends LivingEntity {
         Player.currentDirection = currentDirection;
     }
 
-
+    /*
+    * Creates an enum for the players current facing direction for future actiosn stores and offset of x and y
+    *
+    * */
     public enum FacingDirection {
         UP(0, -1),
         DOWN(0, 1),

@@ -12,6 +12,9 @@ public class Init extends JFrame {
     // The terminal that InputManager will use
     private AsciiPanel terminal;
 
+    /**
+     * Instantiates everything!
+     */
     public Init() {
         super();
         terminal = new AsciiPanel(80, 60, AsciiFont.CP437_16x16);

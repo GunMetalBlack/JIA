@@ -33,12 +33,16 @@ public class InputManager implements KeyListener {
         Player player = livingEntityManager.player;
         if (keyCode == KeyEvent.VK_W) {
             player.move(0, -1);
+            player.setCurrentDirection(Player.FacingDirection.UP);
         } else if (keyCode == KeyEvent.VK_D) {
             player.move(1, 0);
+            player.setCurrentDirection(Player.FacingDirection.RIGHT);
         } else if (keyCode == KeyEvent.VK_A) {
             player.move(-1, 0);
+            player.setCurrentDirection(Player.FacingDirection.LEFT);
         } else if (keyCode == KeyEvent.VK_S) {
             player.move(0, 1);
+            player.setCurrentDirection(Player.FacingDirection.LEFT);
         } else if (keyCode == KeyEvent.VK_UP) {
             player.setCurrentDirection(Player.FacingDirection.UP);
 
@@ -51,10 +55,10 @@ public class InputManager implements KeyListener {
         } else if (keyCode == KeyEvent.VK_RIGHT) {
             player.setCurrentDirection(Player.FacingDirection.RIGHT);
 
-        } else if (keyCode == KeyEvent.VK_ENTER) {
+        } else if (keyCode == KeyEvent.VK_E) {
             player.manipulateBlock(true);
 
-        } else if (keyCode == KeyEvent.VK_SHIFT) {
+        } else if (keyCode == KeyEvent.VK_Q) {
             player.manipulateBlock(false);
         }
     }

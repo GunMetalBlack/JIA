@@ -10,6 +10,10 @@ import javax.imageio.ImageIO;
 
 public class Level {
 
+    /**
+     * Creates a level from a png using entity ids
+     */
+
     // HashMap to store specific RGB to ASCII character mappings
     private static final HashMap<Color, String> colorToAsciiMap = new HashMap<>();
     public static Level testLevel = new Level("test.png");

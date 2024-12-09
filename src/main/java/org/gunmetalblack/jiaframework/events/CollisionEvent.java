@@ -5,6 +5,9 @@ import org.gunmetalblack.jiaframework.entity.Entity;
 import java.util.ArrayList;
 
 public class CollisionEvent {
+    /**
+     * Creates and stores data for the collision event
+     */
     private int xPos;
     private int yPos;
     private ArrayList<Entity> collisions = new ArrayList<>();

@@ -6,6 +6,9 @@ import org.gunmetalblack.jiaframework.render.RenderLayerName;
 import java.util.ArrayList;
 
 public class ChildRenderLayer extends RenderLayer {
+    /**
+     * Acts as a child to the main render layer allowing for convenient structer
+     */
     private RenderLayer ParentLayer;
     public ChildRenderLayer(RenderLayerName layerName, ArrayList<Entity> renderObjects, int maxColumns, int maxRows) {
         super(layerName, renderObjects, maxColumns, maxRows);

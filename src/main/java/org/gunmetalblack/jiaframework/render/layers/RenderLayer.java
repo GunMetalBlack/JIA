@@ -13,6 +13,13 @@ public class RenderLayer {
     private int maxColumns;
     private int maxRows;
 
+    /**
+     * Is the main render layer class that the others use stores as list of entities and utility functions for rendering
+     * @param layerName the layers id
+     * @param renderObjects the objects to be rendered
+     * @param maxColumns max X
+     * @param maxRows max Y
+     */
     public RenderLayer(RenderLayerName layerName, ArrayList<Entity> renderObjects, int maxColumns, int maxRows) {
         this.renderObjects = renderObjects;
         this.layerName = layerName;
@@ -43,7 +50,9 @@ public class RenderLayer {
     public Entity[][] getEntitiesInLayerAsArray() {
         Entity[][] ar = new Entity[maxRows][maxColumns];
         for (Entity entity : new ArrayList<>(getEntitiesInLayer())) {
-            ar[entity.getyPos()][entity.getxPos()] = entity;
+            if(entity != null) {
+                ar[entity.getyPos()][entity.getxPos()] = entity;
+            }
         }
         return ar;
     }

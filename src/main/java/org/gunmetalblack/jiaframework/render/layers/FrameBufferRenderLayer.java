@@ -11,6 +11,13 @@ public class FrameBufferRenderLayer extends MainRenderLayer {
 
     private HashMap<RenderLayerName, ChildRenderLayer> layers = new HashMap<>();
 
+    /**
+     * Constructs the FrameBuffer which acts as the collapsable layer for all of the other render layer
+     * @param layerName
+     * @param renderObjects
+     * @param maxColumns
+     * @param maxRows
+     */
     public FrameBufferRenderLayer(RenderLayerName layerName, ArrayList<Entity> renderObjects, int maxColumns, int maxRows) {
         super(layerName, renderObjects, maxColumns, maxRows);
         renderObjectsFrameBuffer = new Entity[maxRows][maxColumns];

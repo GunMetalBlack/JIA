@@ -11,6 +11,9 @@ public class LivingEntityManager {
     public static Player player;
     public LivingEntityManager(ChildRenderLayer livingLayer)
     {
+        /*
+        * Sets the spawn of the player based off the gamelayer position
+        * */
         this.livingLayer = livingLayer;
         Entity pSpawn = null;
         ArrayList<Entity> entities = livingLayer.getParentLayer().getEntitiesInLayer();
