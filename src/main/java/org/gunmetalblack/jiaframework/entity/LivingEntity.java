@@ -9,10 +9,11 @@ import java.awt.*;
 
 
 public class LivingEntity extends Entity {
-    private RenderLayer livingLayer;
+
+    private ChildRenderLayer livingLayer;
 
     public LivingEntity(char character, Color foregroundColor, Color backgroundColor, int xPos, int yPos, ChildRenderLayer livingLayer) {
-        super(character, foregroundColor, backgroundColor, xPos, yPos, true);
+        super(character, foregroundColor, backgroundColor, xPos, yPos, true,false);
         this.livingLayer = livingLayer;
     }
 
@@ -49,6 +50,12 @@ public class LivingEntity extends Entity {
         }
     }
 
+    /*
+    * Getter for the render Layer
+    * */
+    public ChildRenderLayer getLivingLayer() {
+        return livingLayer;
+    }
 
     /**
      * Sets the y-coordinate of the entity.

@@ -92,6 +92,10 @@ public class Render {
                 renderToFramebuffer(childLayer.getEntitiesInLayerAsArray(), 0, 0);
             }
         }
+    }
+
+    public void renderFrameBufferToWindow()
+    {
         renderEntityArray(frameBuffer.getEntitiesInLayerAsArray(), frameBuffer.getMaxColumns(), frameBuffer.getMaxRows());
     }
 

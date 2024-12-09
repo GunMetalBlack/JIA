@@ -13,7 +13,7 @@ import java.awt.*;
 public class Entity {
     private int xPos;
     private int yPos;
-
+    private boolean isBreakable;
     private boolean canCollide;
     private AsciiCharacterData graphic;
 
@@ -25,12 +25,14 @@ public class Entity {
      * @param backgroundColor the background color behind the character.
      * @param xPos            the x-coordinate of the entity in the world.
      * @param yPos            the y-coordinate of the entity in the world.
+     * @param isBreakable     the flag the determines if the entity can be broken.
      */
-    public Entity(char character, Color foregroundColor, Color backgroundColor, int xPos, int yPos, boolean canCollide) {
+    public Entity(char character, Color foregroundColor, Color backgroundColor, int xPos, int yPos, boolean canCollide, boolean isBreakable) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.graphic = new AsciiCharacterData(character, foregroundColor, backgroundColor);
         this.canCollide = canCollide;
+        this.isBreakable = isBreakable;
         if(this.canCollide)
         {
             GlobalEventManager.collisionEventManager.addEventListener(this::onCollisionEvent);
@@ -48,7 +50,7 @@ public class Entity {
      * @param canCollide the value on instantiation that determines how it interacts with other entities when colliding
      */
     public Entity(char character, int xPos, int yPos, boolean canCollide) {
-        this(character,Color.white, Color.black, xPos, yPos, canCollide);
+        this(character,Color.white, Color.black, xPos, yPos, canCollide,false);
     }
 
     /**
@@ -114,6 +116,14 @@ public class Entity {
      */
     public AsciiCharacterData getGraphic() {
         return graphic;
+    }
+
+    public boolean isBreakable() {
+        return isBreakable;
+    }
+
+    public void setBreakable(boolean breakable) {
+        isBreakable = breakable;
     }
 
     public boolean canCollide() {

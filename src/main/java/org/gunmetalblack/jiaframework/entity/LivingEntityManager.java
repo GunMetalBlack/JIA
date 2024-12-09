@@ -6,10 +6,10 @@ import org.gunmetalblack.jiaframework.render.layers.RenderLayer;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class LivingEntitiyManager {
+public class LivingEntityManager {
     private static ChildRenderLayer livingLayer;
     public static Player player;
-    public LivingEntitiyManager(ChildRenderLayer livingLayer)
+    public LivingEntityManager(ChildRenderLayer livingLayer)
     {
         this.livingLayer = livingLayer;
         Entity pSpawn = null;

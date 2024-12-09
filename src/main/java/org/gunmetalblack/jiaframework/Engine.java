@@ -1,7 +1,7 @@
 package org.gunmetalblack.jiaframework;
 
 import org.gunmetalblack.Init;
-import org.gunmetalblack.jiaframework.entity.LivingEntitiyManager;
+import org.gunmetalblack.jiaframework.entity.LivingEntityManager;
 import org.gunmetalblack.jiaframework.input.InputManager;
 import org.gunmetalblack.jiaframework.render.Render;
 import org.gunmetalblack.jiaframework.render.RenderLayerName;
@@ -9,13 +9,13 @@ import org.gunmetalblack.jiaframework.render.RenderLayerName;
 public class Engine {
     private Init window;
     private Render GameRenderer;
-    private LivingEntitiyManager livingEntitiyManager;
+    private LivingEntityManager livingEntityManager;
     public Engine(Init window, InputManager inputManager)
     {
         this.window = window;
         this.GameRenderer = new Render(window);
-        this.livingEntitiyManager = new LivingEntitiyManager(GameRenderer.layerToBeRendered.get(RenderLayerName.GAME_LAYER).getChildLayer(RenderLayerName.GL_LIVING_ENTITY_LAYER));
-        inputManager.setLivingEntitiyManager(this.livingEntitiyManager);
+        this.livingEntityManager = new LivingEntityManager(GameRenderer.layerToBeRendered.get(RenderLayerName.GAME_LAYER).getChildLayer(RenderLayerName.GL_LIVING_ENTITY_LAYER));
+        inputManager.setLivingEntitiyManager(this.livingEntityManager);
 
         Update();
     }
@@ -25,10 +25,13 @@ public class Engine {
      */
     public void Update()
     {
-        livingEntitiyManager.instantiateLivingEntity(GameRenderer.layerToBeRendered.get(RenderLayerName.GAME_LAYER).getChildLayer(RenderLayerName.GL_LIVING_ENTITY_LAYER),livingEntitiyManager.player);
+        livingEntityManager.instantiateLivingEntity(GameRenderer.layerToBeRendered.get(RenderLayerName.GAME_LAYER).getChildLayer(RenderLayerName.GL_LIVING_ENTITY_LAYER), livingEntityManager.player);
         while (true)
         {
+
             GameRenderer.renderAllLayersToFramebuffer();
+            LivingEntityManager.player.highlightCurrentDirection();
+            GameRenderer.renderFrameBufferToWindow();
             GameRenderer.renderMainLayerAndChildrenByName(RenderLayerName.FRAME_BUFFER);
             window.getTerminal().repaint();
         }

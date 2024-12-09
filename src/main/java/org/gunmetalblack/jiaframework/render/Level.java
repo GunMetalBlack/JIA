@@ -73,7 +73,7 @@ public class Level {
         Entity entityToMap = new Entity('?',0,0,false);
         if(entityID.equals("id_wall"))
         {
-            entityToMap = new Entity((char)219,0,0,true);
+            entityToMap = new Entity((char)219,Color.DARK_GRAY,Color.BLACK,0,0,true,false);
         }else if (entityID.equals("id_spawn"))
         {
             entityToMap = new Entity('*',0,0,false);
@@ -85,7 +85,10 @@ public class Level {
             entityToMap = new Entity(' ',0,0,false);
         }else if (entityID.equals("id_floor"))
         {
-            entityToMap = new Entity((char)176,Color.GRAY,Color.black,0,0,false);
+            entityToMap = new Entity((char)176,new Color(58,191,22),Color.black,0,0,false,false);
+        }else if(entityID.equals("id_breakable"))
+        {
+            entityToMap = new Entity((char)219 ,new Color(51, 24, 0),Color.black,0,0,true,true);
         }
         return entityToMap;
     }
@@ -98,6 +101,7 @@ public class Level {
         colorToAsciiMap.put(new Color(0, 0, 255), "id_blue");    // Blue
         colorToAsciiMap.put(new Color(255, 255, 255), "id_empty"); // White empty
         colorToAsciiMap.put(new Color(0, 0, 0), "id_floor");      // Black floor
+        colorToAsciiMap.put(new Color(0x5b, 0x72, 0x63), "id_breakable");      // Breakable entity
         // Add more specific RGB to ASCII mappings here...
     }
 
