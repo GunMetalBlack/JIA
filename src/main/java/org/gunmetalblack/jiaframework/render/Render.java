@@ -1,6 +1,6 @@
 package org.gunmetalblack.jiaframework.render;
 
-import org.gunmetalblack.Init;
+import org.gunmetalblack.jiaframework.JIAWindow;
 import org.gunmetalblack.jiaframework.entity.Entity;
 import org.gunmetalblack.jiaframework.render.layers.ChildRenderLayer;
 import org.gunmetalblack.jiaframework.render.layers.FrameBufferRenderLayer;
@@ -15,7 +15,7 @@ import java.util.HashMap;
  * It supports rendering both to a window and to a framebuffer, allowing for complex multi-layer rendering.
  */
 public class Render {
-    private Init window;
+    private JIAWindow window;
     public HashMap<RenderLayerName, MainRenderLayer> layerToBeRendered = new HashMap<>();
     public static MainRenderLayer mainGameLayer;
     public static FrameBufferRenderLayer frameBuffer;
@@ -26,7 +26,7 @@ public class Render {
      *
      * @param window the initialization object representing the game window.
      */
-    public Render(Init window) {
+    public Render(JIAWindow window) {
         this.window = window;
         /*
          * Initializes the framebuffer and the main game layer with sub-layers.

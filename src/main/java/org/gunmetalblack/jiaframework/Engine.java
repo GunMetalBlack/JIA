@@ -1,16 +1,15 @@
 package org.gunmetalblack.jiaframework;
 
-import org.gunmetalblack.Init;
 import org.gunmetalblack.jiaframework.entity.LivingEntityManager;
 import org.gunmetalblack.jiaframework.input.InputManager;
 import org.gunmetalblack.jiaframework.render.Render;
 import org.gunmetalblack.jiaframework.render.RenderLayerName;
 
 public class Engine {
-    private Init window;
+    private JIAWindow window;
     private Render GameRenderer;
     private LivingEntityManager livingEntityManager;
-    public Engine(Init window, InputManager inputManager)
+    public Engine(JIAWindow window, InputManager inputManager)
     {
         this.window = window;
         this.GameRenderer = new Render(window);

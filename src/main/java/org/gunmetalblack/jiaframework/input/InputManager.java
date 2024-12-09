@@ -1,6 +1,6 @@
 package org.gunmetalblack.jiaframework.input;
 
-import org.gunmetalblack.Init;
+import org.gunmetalblack.jiaframework.JIAWindow;
 import org.gunmetalblack.jiaframework.entity.LivingEntityManager;
 import org.gunmetalblack.jiaframework.entity.Player;
 
@@ -8,10 +8,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
 public class InputManager implements KeyListener {
-    private Init window;
+    private JIAWindow window;
     private LivingEntityManager livingEntityManager;
 
-    public InputManager(Init window) {
+    public InputManager(JIAWindow window) {
         this.window = window;
     }
 
@@ -42,7 +42,7 @@ public class InputManager implements KeyListener {
             player.setCurrentDirection(Player.FacingDirection.LEFT);
         } else if (keyCode == KeyEvent.VK_S) {
             player.move(0, 1);
-            player.setCurrentDirection(Player.FacingDirection.LEFT);
+            player.setCurrentDirection(Player.FacingDirection.DOWN);
         } else if (keyCode == KeyEvent.VK_UP) {
             player.setCurrentDirection(Player.FacingDirection.UP);
 

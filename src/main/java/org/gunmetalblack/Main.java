@@ -1,5 +1,6 @@
 package org.gunmetalblack;
 
+import org.gunmetalblack.jiaframework.JIAWindow;
 import org.gunmetalblack.jiaframework.input.InputManager;
 import org.gunmetalblack.jiaframework.Engine;
 
@@ -17,7 +18,7 @@ public class Main {
     * */
     public static void main(String[] args)
     {
-        Init window = new Init();
+        JIAWindow window = new JIAWindow();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
         // Pass the Init instance to InputManager

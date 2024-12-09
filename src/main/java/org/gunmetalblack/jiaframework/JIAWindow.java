@@ -1,4 +1,4 @@
-package org.gunmetalblack;
+package org.gunmetalblack.jiaframework;
 
 import asciiPanel.AsciiFont;
 import asciiPanel.AsciiPanel;
@@ -6,7 +6,7 @@ import asciiPanel.AsciiPanel;
 
 import javax.swing.*;
 
-public class Init extends JFrame {
+public class JIAWindow extends JFrame {
     private static final long serialVersionUID = 1060623638149583738L;
 
     // The terminal that InputManager will use
@@ -15,7 +15,7 @@ public class Init extends JFrame {
     /**
      * Instantiates everything!
      */
-    public Init() {
+    public JIAWindow() {
         super();
         terminal = new AsciiPanel(80, 60, AsciiFont.CP437_16x16);
         setFocusable(true);

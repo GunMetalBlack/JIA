@@ -21,8 +21,8 @@ public class UserInterfaceRenderLayer extends MainRenderLayer{
         renderObjectsUI = new Entity[maxRows][maxColumns];
         buildBoundingBox();
         writeUIText(1,1, "Welcome to JIA-Sandbox!");
-        writeUIText(1,3, "This is a simple sandbox game that represents a bigger project the JIA engine.");
-        writeUIText(1,5, "Its fully built with a entity system and a multi-layer render engine on");
+        writeUIText(1,3, "This is a simple sandbox game that represents a bigger project: JIA Engine.");
+        writeUIText(1,5, "It is fully built with an entity system and a multi-layer render engine on");
         writeUIText(1,6,"top of a working event system!");
         writeUIText(1,8,"CONTROLS:");
         writeUIText(1,9,"W,A,S,D for movement!");
