@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
     implementation("com.github.trystan:AsciiPanel:-SNAPSHOT")
+    implementation("com.google.code.gson:gson:2.10")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }

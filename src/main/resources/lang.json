@@ -1,0 +1,9 @@
+{
+  "dialogs": [
+    {
+      "id": "intro_1",
+      "speaker": "Narrator",
+      "text": "JAI is here!~testing newLines"
+    }
+  ]
+}
