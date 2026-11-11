@@ -15,13 +15,18 @@ public class JIAWindow extends JFrame {
     /**
      * Instantiates everything!
      */
+    public static final int RKIS_COLUMNS = 140;
+    public static final int RKIS_ROWS = 58;
+
     public JIAWindow() {
         super();
-        terminal = new AsciiPanel(80, 60, AsciiFont.CP437_16x16);
+        setTitle("R.K.I.S. — Recovery Kernel Integration System");
+        terminal = new AsciiPanel(RKIS_COLUMNS, RKIS_ROWS, AsciiFont.CP437_10x10);
         setFocusable(true);
         setResizable(false);
         add(terminal);
         pack();
+        setLocationRelativeTo(null);
         //Instantiate Event Listeners:
         // Temp testing
         //GlobalEventManager.collisionEventManager.addEventListener(GlobalEventManager.collisionEventListener);
