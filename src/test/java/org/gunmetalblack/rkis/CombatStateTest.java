@@ -77,4 +77,49 @@ class CombatStateTest {
         assertFalse(state.needsReplacement());
         assertFalse(roster.cards().get(2).isAlive());
     }
+
+    @Test void forgeCanAtomicallyReplaceAPlaugeRosterSlot() {
+        Roster roster = new Roster();
+        Card original = roster.cards().get(0);
+        original.receiveDamage(999);
+        assertFalse(original.isAlive());
+        Card rebuilt = new Card("RE-SPARK", CardType.STEEL, 32, 5, 5,
+                "BRACE", "HOLD THE LINE", original.trait());
+        roster.replace(0, rebuilt);
+        assertSame(rebuilt, roster.cards().get(0));
+        assertTrue(rebuilt.isAlive());
+        assertEquals("RECKLESS", rebuilt.trait());
+    }
+
+    @Test void bossesUseTheirAuthoredSystemMechanics() {
+        CombatState len = new CombatState(Encounter.LEN);
+        len.endPhase();
+        len.endPhase();
+        assertEquals(Lane.RIGHT, len.distortedLane());
+
+        CombatState paywall = new CombatState(Encounter.PAYWALL);
+        paywall.endPhase();
+        assertTrue(paywall.hiddenFees());
+        paywall.attack(Lane.LEFT);
+        assertEquals(6, paywall.energy());
+
+        CombatState armstrong = new CombatState(Encounter.ARMSTRONG);
+        armstrong.endPhase();
+        assertEquals(1, armstrong.productivityTax());
+        armstrong.attack(Lane.LEFT);
+        assertEquals(6, armstrong.energy());
+    }
+
+    @Test void positionSwapMemoryExchangesAdjacentDeployedCards() {
+        Roster roster = new Roster();
+        CombatState state = new CombatState(Encounter.DRONE, roster);
+        state.card(Lane.RIGHT).receiveDamage(20);
+        state.endPhase();
+        state.deployReserve(0);
+        assertEquals("SHIFT", state.card(Lane.RIGHT).name());
+        String result = state.memory(Lane.RIGHT, Lane.CENTER);
+        assertTrue(result.contains("SWAPS"));
+        assertEquals("SHIFT", state.card(Lane.CENTER).name());
+        assertEquals("RIVET", state.card(Lane.RIGHT).name());
+    }
 }

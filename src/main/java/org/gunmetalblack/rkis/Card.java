@@ -15,6 +15,7 @@ public final class Card {
     private boolean primed;
     private boolean coverAvailable;
     private boolean traitUsed;
+    private boolean stubbornUsed;
 
     public Card(String name, CardType type, int maxHp, int attack, int defense,
                 String memory, String passive, String trait) {
@@ -48,7 +49,7 @@ public final class Card {
     public void useAction() { actions++; }
     public void beginRound(boolean hasSteelNeighbor) { actions = 0; coverAvailable = hasSteelNeighbor; }
     public void endEnemyResponse() { shield = 0; coverAvailable = false; primed = false; }
-    public void startEncounter() { shield = 0; actions = 0; primed = false; coverAvailable = false; traitUsed = false; }
+    public void startEncounter() { shield = 0; actions = 0; primed = false; coverAvailable = false; traitUsed = false; stubbornUsed = false; }
     public boolean traitUsed() { return traitUsed; }
     public int useRecklessBonus() {
         if (!traitUsed && trait.equals("RECKLESS")) { traitUsed = true; return 1; }
@@ -65,6 +66,10 @@ public final class Card {
 
     public int receiveDamage(int raw) {
         int damage = raw == 0 ? 0 : Math.max(1, raw - defense);
+        if (!stubbornUsed && passive.equals("STUBBORN") && damage > 0) {
+            damage = Math.max(0, damage - 2);
+            stubbornUsed = true;
+        }
         if (coverAvailable) {
             damage = Math.max(0, damage - 2);
             coverAvailable = false;
@@ -74,5 +79,10 @@ public final class Card {
         int hpDamage = damage - absorbed;
         hp = Math.max(0, hp - hpDamage);
         return hpDamage;
+    }
+    public int receiveTrueDamage(int amount) {
+        int damage = Math.min(hp, Math.max(0, amount));
+        hp -= damage;
+        return damage;
     }
 }
