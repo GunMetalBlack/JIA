@@ -19,6 +19,7 @@ public class UserInterfaceRenderLayer extends MainRenderLayer{
     public UserInterfaceRenderLayer(RenderLayerName layerName, ArrayList<Entity> renderObjects, int maxColumns, int maxRows) {
         super(layerName, renderObjects, maxColumns, maxRows);
         renderObjectsUI = new Entity[maxRows][maxColumns];
+
         buildBoundingBox();
         writeUIText(1,1, "Welcome to JIA-Sandbox!");
         writeUIText(1,3, "This is a simple sandbox game that represents a bigger project: JIA Engine.");
@@ -28,6 +29,17 @@ public class UserInterfaceRenderLayer extends MainRenderLayer{
         writeUIText(1,9,"W,A,S,D for movement!");
         writeUIText(1,10,"E to place blocks and Q to break blocks!");
         writeUIText(1,11,"Use the arrow keys to choose the direction of placement!");
+    }
+
+
+    //Only update if a change was made
+    public void runUpdateUI(boolean isDirty)
+    {
+        if (isDirty = true)
+        {
+            // Call the UI update function
+            isDirty = false;
+        }
     }
 
     /**

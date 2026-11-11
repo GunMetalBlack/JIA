@@ -15,7 +15,7 @@ public class Player extends LivingEntity {
         currentDirection = FacingDirection.UP;
     }
 
-
+//**Depreciated**
 //    public void highlightCurrentDirection() {
 //        for (Entity item : getLivingLayer().getParentLayer().getEntitiesInLayer()) {
 //            if (item.equals(currentlyHighlightedEntity)) {
@@ -39,7 +39,6 @@ public class Player extends LivingEntity {
     public void manipulateBlock(Boolean shouldPlace) {
         int relativeX = getxPos() + currentDirection.getX();
         int relativeY = getyPos() + currentDirection.getY();
-
         // good lord
         ArrayList<Entity> toRemove = new ArrayList<>();
         ArrayList<Entity> toAdd = new ArrayList<>();
